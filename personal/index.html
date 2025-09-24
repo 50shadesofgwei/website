@@ -1,0 +1,59 @@
+<!-- ========== index.html ==========
+     HOME PAGE -->
+     <!DOCTYPE html>
+     <html lang="en">
+       <head>
+         <meta charset="utf-8" />
+         <meta name="viewport" content="width=device-width, initial-scale=1" />
+         <title>Ramil Amirov — Home</title>
+         <meta name="description" content="Minimal personal site. Black background, white text. Home / About / Contact." />
+         <meta name="color-scheme" content="dark" />
+         <style>
+           :root { --bg:#000; --text:#fff; --muted:#bdbdbd; --maxw:760px; }
+           *,*::before,*::after{box-sizing:border-box}
+           html,body{height:100%}
+           body{margin:0;background:var(--bg);color:var(--text);font:16px/1.7 ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,Arial,sans-serif}
+           a{color:var(--text);text-decoration:none}
+           a:hover{text-decoration:underline}
+           .wrap{max-width:var(--maxw);margin:0 auto;padding:40px 18px 80px}
+           header{margin-bottom:28px}
+           h1{font-size:clamp(28px,4.5vw,40px);font-weight:800;margin:0 0 6px}
+           .nav{color:var(--muted)}
+           .nav a{padding:2px 4px}
+           .sep{padding:0 6px}
+           section{padding:24px 0}
+           h2{font-size:18px;margin:0 0 10px;color:var(--muted);font-weight:700;letter-spacing:.2px}
+           ul{margin:0;padding-left:18px}
+           li{margin:8px 0}
+           footer{color:var(--muted);margin-top:36px}
+         </style>
+       </head>
+       <body>
+         <div class="wrap">
+            <header>
+                <h1>Ramil Amirov</h1>
+                <nav class="nav" aria-label="Primary">
+                  <a href="index.html"><b>Home</b></a><span class="sep">·</span>
+                  <a href="about.html" aria-current="page">Stuff</a><span class="sep">·</span>
+                  <a href="contact.html">Contact</a>
+                </nav>
+              </header>
+              <main>
+                <section>
+                    <ul>
+                        <li>Born in Saint Petersburg, Russia, on April 13, 2004</li>
+                        <li>Played competitive chess from 2010 to 2016 (<a href="https://ratings.fide.com/profile/34164526/chart" target="_blank" rel="noopener" style="text-decoration: underline">blitz ATH 1932 at age 12</a>)</li>
+                        <li>Left chess to focus fully on school; studied at PML 30, <a href="https://ib-schools.com/league-tables/global-top-ib-schools" target="_blank" rel="noopener" style="text-decoration: underline">Letovo School</a>, and PML 239, which are among the best schools in Russia</li>
+                        <li>In my final year of school, I took up competitive programming, which helped me gain admission to university</li>
+                        <li>Currently studying at ITMO University, majoring in Computer Science</li>
+                        <li>Started working after my first year of university as a backend Python developer, then pivoted to DeFi and crypto</li>
+                        <li>From 2023 to 2025, worked as an EVM DeFi developer/trader on several projects (<a href="https://github.com/montyp0x/stuff/blob/main/cv.pdf" target="_blank" rel="noopener" style="text-decoration: underline">CV</a>)</li>
+                        <li>Left my job in 2025 to found <a href="https://app.ceres.cash" target="_blank" rel="noopener" style="text-decoration: underline">Ceres Finance</a>, a DeFi superapp on the TON blockchain, but after a few months, decided to move on</li>
+                      </ul>
+                </section>
+              </main>
+            </div>
+         <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+       </body>
+     </html>
+    
