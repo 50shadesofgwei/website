@@ -16,6 +16,14 @@
       a:hover{text-decoration:underline}
       .wrap{max-width:var(--maxw);margin:0 auto;padding:40px 18px 80px}
       header{margin-bottom:28px}
+      .ack{margin:12px 0 22px;padding:14px 16px;background:#0a0a0a;
+     border:1px solid #222;border-radius:12px}
+.ack .eyebrow{display:inline-block;font-size:12px;letter-spacing:.08em;
+              text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.ack p{margin:6px 0 8px}
+.ack ul{margin:6px 0 0 1.1em;padding-left:0}
+.ack li{margin:4px 0}
+.ack a{text-decoration:underline;text-underline-offset:2px}
       h1{font-size:clamp(28px,4.5vw,40px);font-weight:800;margin:0 0 6px}
       .nav{color:var(--muted)}
       .nav a{padding:2px 4px}
@@ -54,6 +62,14 @@
           <time datetime="2025-10-08">2025-10-08</time> - TRON vs TON
         </p>
       </header>
+      <aside class="ack" id="acknowledgements" aria-label="Acknowledgements">
+        <div class="eyebrow">Acknowledgements</div>
+        <p>
+          Thanks to <a href="https://t.me/basicblockradio" target="_blank" rel="noopener">Basic Block Radio</a> and
+          <a href="https://x.com/FrankResearcher" target="_blank" rel="noopener">Igor Igamberdiev</a> for information
+          and discussions about TRON, TON, and stablecoin rails.
+        </p>
+      </aside>
 
       <main>
         <article>
@@ -78,7 +94,7 @@
           <p>I also think it’s worth introducing a metric like Stablecoin Market Cap / DeFi TVL to show how unusual Tron is.</p>
 
           <div class="table-wrap" role="region" aria-label="Stablecoin/DeFi comparison">
-            <span class="badge">Metric</span><span class="muted">stable mcap / DeFi TVL</span>
+            <span class="badge">Metric</span><span class="muted">stable mcap / DeFi TVL from DefiLLama at 10-08-2025</span>
             <table class="tron-ton">
               <thead>
                 <tr>
