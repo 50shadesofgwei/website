@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>TON vs TRON: Compete for Payments, Not DeFi</title>
+    <meta name="description" content="Notes comparing TRON and TON: fees UX, liquidity, payments vs DeFi adoption." />
+    <meta name="color-scheme" content="dark" />
+    <style>
+      :root { --bg:#000; --text:#fff; --muted:#bdbdbd; --maxw:760px; }
+      *,*::before,*::after{box-sizing:border-box}
+      html,body{height:100%}
+      body{margin:0;background:var(--bg);color:var(--text);
+           font:16px/1.7 ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,Arial,sans-serif}
+      a{color:var(--text);text-decoration:none}
+      a:hover{text-decoration:underline}
+      .wrap{max-width:var(--maxw);margin:0 auto;padding:40px 18px 80px}
+      header{margin-bottom:28px}
+      h1{font-size:clamp(28px,4.5vw,40px);font-weight:800;margin:0 0 6px}
+      .nav{color:var(--muted)}
+      .nav a{padding:2px 4px}
+      .sep{padding:0 6px}
+      .muted{color:var(--muted)}
+      article{padding:24px 0}
+      article img{max-width:100%;height:auto}
+      hr{border:0;border-top:1px solid #161616;margin:22px 0}
+      blockquote{margin:12px 0;padding-left:14px;border-left:3px solid #222;color:var(--muted)}
+      footer{color:var(--muted);margin-top:36px}
+      article p + ul { margin-top: -10px; }
+      article ul { margin: 6px 0 1em 1.2em; padding-left: 1.2em; }
+      article [id] { scroll-margin-top: 16px; }
+      :target { background:#0a0a0a; outline:1px solid #222; border-radius:8px; transition:background .3s; }
+      .table-wrap{overflow:auto;margin:14px 0 22px}
+    table.tron-ton{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+    table.tron-ton caption{caption-side:bottom;color:var(--muted);font-size:14px;padding-top:6px;text-align:left}
+    table.tron-ton th, table.tron-ton td{padding:10px 12px;border-bottom:1px solid #161616;vertical-align:middle}
+    table.tron-ton th{color:var(--muted);font-weight:600;text-align:left;letter-spacing:.2px}
+    table.tron-ton td.num{text-align:right;white-space:nowrap}
+    table.tron-ton tr:hover{background:#0a0a0a}
+    table.tron-ton thead th{position:sticky;top:0;background:rgba(0,0,0,.6);backdrop-filter:saturate(140%) blur(2px)}
+    .badge{display:inline-block;font-size:12px;padding:2px 8px;border:1px solid #2a2a2a;border-radius:999px;color:#bdbdbd;margin-right:8px}
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <header>
+        <h1>Ramil Amirov</h1>
+        <nav class="nav" aria-label="Primary">
+          <a href="/index.html">Home</a><span class="sep">·</span>
+          <a href="/stuff.html">Stuff</a><span class="sep">·</span>
+          <a href="/contact.html">Contact</a>
+        </nav>
+        <p class="muted">
+          <time datetime="2025-10-08">2025-10-08</time> - TRON vs TON
+        </p>
+      </header>
+
+      <main>
+        <article>
+          <h2>TON vs TRON: Compete for Payments, Not DeFi</h2>
+
+          <p>This whole piece was sparked by a simple curiosity: why does Tron host $77B of USDT when the chain has barely evolved in recent years?</p>
+
+          <p>And honestly, Tron is a pretty peculiar “blockchain” if we can even call it that. By definition a blockchain should be decentralized, yet everything about Tron practically screams centralization.</p>
+
+          <p>To start with, there’s a bit of a personality cult. The leading lending protocol is JustLend, the main DEX is SUNSwap, the flagship CDP is JustStables, and the smallest unit of TRX is the sun. Of course, none of this proves any formal affiliation with Tron’s founder Justin Sun, but at the very least it’s… amusing.</p>
+
+          <p>Speaking seriously, the validator set leaves a lot to be desired: 27 is hardly enough to claim genuine decentralization.</p>
+        
+          <hr />
+
+          <p>Beyond decentralization, there’s DeFi on Tron, which, in my view, is effectively dead, even though at the time of writing Tron <a href="https://defillama.com/chains" target="_blank" rel="noopener" style="text-decoration: underline">ranks 7th among chains by DeFi TVL</a>. You might ask: why call it “dead” then? Because if you strip out the top two protocols from Tron’s total DeFi TVL, the remainder across everything else is only about $200 million.</p>
+
+          <p>Somehow, DeFi on Tron ended up highly centralized… which, in a way, is logical: there’s very little capital in other protocols because there are only around 20 with TVL &gt;$1000, which is astonishing given Tron is an EVM-compatible chain (with quirks, sure, but let’s leave those aside here).</p>
+
+          <p>Maybe developers are deterred by a moribund DeFi market on Tron or maybe it’s the total lack of developer support from Tron’s own side, <a href="https://github.com/TronLink/tronlink-extension/issues/313" target="_blank" rel="noopener" style="text-decoration: underline">where a single issue has been left open for 4(!) years</a>.</p>
+
+          <p>I also think it’s worth introducing a metric like Stablecoin Market Cap / DeFi TVL to show how unusual Tron is.</p>
+
+          <div class="table-wrap" role="region" aria-label="Stablecoin/DeFi comparison">
+            <span class="badge">Metric</span><span class="muted">stable mcap / DeFi TVL</span>
+            <table class="tron-ton">
+              <thead>
+                <tr>
+                  <th scope="col">chain</th>
+                  <th scope="col" class="num">DeFi TVL, $B</th>
+                  <th scope="col" class="num">Stable mcap, $B</th>
+                  <th scope="col" class="num">stable mcap / DeFi TVL</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">eth</th>
+                  <td class="num">134</td>
+                  <td class="num">161</td>
+                  <td class="num">1.201492537</td>
+                </tr>
+                <tr>
+                  <th scope="row">tron</th>
+                  <td class="num">6</td>
+                  <td class="num">77</td>
+                  <td class="num">12.83333333</td>
+                </tr>
+                <tr>
+                  <th scope="row">sol</th>
+                  <td class="num">16.8</td>
+                  <td class="num">15.5</td>
+                  <td class="num">0.9226190476</td>
+                </tr>
+                <tr>
+                  <th scope="row">base</th>
+                  <td class="num">8</td>
+                  <td class="num">4.6</td>
+                  <td class="num">0.575</td>
+                </tr>
+                <tr>
+                  <th scope="row">bnb</th>
+                  <td class="num">11.6</td>
+                  <td class="num">14.1</td>
+                  <td class="num">1.215517241</td>
+                </tr>
+                <tr>
+                  <th scope="row">arb</th>
+                  <td class="num">6</td>
+                  <td class="num">4.4</td>
+                  <td class="num">0.7333333333</td>
+                </tr>
+                <tr>
+                  <th scope="row">sui</th>
+                  <td class="num">3.4</td>
+                  <td class="num">0.9</td>
+                  <td class="num">0.2647058824</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          
+
+          <p>As an attentive reader will notice, Tron clearly stands out here.<br />
+            <hr />
+          On top of that, Tron can fairly be called <a href="https://gasfeesnow.com/" target="_blank" rel="noopener" style="text-decoration: underline">an expensive chain</a>. I know Tron lets you get a certain number of “free” transactions per day by staking TRX, but it’s still inconvenient, especially now that other chains have become so cheap.</p>
+
+          <hr />
+          <p>So why do people still use Tron?</p>
+
+          <p>There isn’t a single definitive answer. Some say it’s mostly habit: USDT landed on TRON in 2019, just as Ethereum fees spiked in the 2020–21 cycles. CEXs standardized flat, low withdrawal fees for TRC-20, and users learned a cheap, predictable flow. Because TRON has been around so long, it’s supported by practically every CEX, and a huge share of P2P exchangers default to TRC-20 transfers.</p>
+
+          <p>There’s also outsized adoption in China. Anecdotally, many Chinese whales trust TRON because it was founded by Justin Sun. And there’s a persistent rumor that some shady Chinese OTC desks unfortunately also <a href="https://www.dlnews.com/articles/regulation/half-of-illicit-crypto-activity-in-2024-was-on-tron-trm-labs/" target="_blank" rel="noopener" style="text-decoration: underline">help launder stolen funds</a>.</p>
+
+          <p>Overall, <a href="https://messari.io/report/the-crypto-theses-2025" target="_blank" rel="noopener" style="text-decoration: underline">Messari sums up</a> the phenomenon like this</a>:</p>
+
+          <blockquote>
+            “By volume and monthly addresses, much of the activity occurs with USDT on Tron. Stickiness likely traces back to earlier periods when Binance offered zero-fee USDT transfers on Tron, even as alternatives like USDC and chains like Base launched. USDT’s network effects - deep, liquid, widely accessible markets across CEXs and DEXs kept TRC-20 the default rail for many emerging-market users.”
+          </blockquote>
+
+          <p>In short, TRON’s very existence undercuts <a href="https://vitalik.eth.limo/general/2025/09/21/low_risk_defi.html" target="_blank" rel="noopener" style="text-decoration: underline"></a>the claim that a blockchain needs DeFi to function normally</a>. TRON does just fine by providing money-transfer rails for people, even if it does so at a painfully high cost. From the outset I saw TRON as a SWIFT-like rail for big players, such as MMs, CEXs, OTC desks, who can stake TRX to cover large volumes of transfers; in practice, though, that thesis hasn’t really borne out.</p>
+
+          <hr />
+          <p>In essence, this short reflection leads to two main takeaways:</p>
+          <ul>
+            <li>A healthy DeFi ecosystem isn’t required for a blockchain to succeed.</li>
+            <li>People use Tron because they’re used to sending money on it.</li>
+          </ul>
+
+          <p>And guess which blockchain’s architecture is literally built for token transfers and is a poor fit for DeFi?</p>
+
+          <p>TON!</p>
+
+          <p>The more I dug into why Tron exists in its current form, the more I realized TON is a far better candidate for that role.</p>
+
+          <p id="ton-today">Let’s start with what’s happening on TON today. To be honest, it’s a mess (imho): a frenzy around gifts (off-chain NFTs lmao), an attempt to spin up a second meme season (apparently trying to replay Solana’s success, though in my view the meme narrative has already peaked) - in short, a bit of a circus.</p>
+
+          <hr />
+          <p>As for DeFi, the recent headlines were the TGE of EVAA, where <a href="https://coinmarketcap.com/currencies/evaa-protocol/" target="_blank" rel="noopener" style="text-decoration: underline">market makers went wild</a>, DeDust team shipped a trading terminal (presumably for the incoming meme season), and the CLMM DEX launch fell flat - BidAsk has attracted <a href="https://bidask.finance/en/app/pools" target="_blank" rel="noopener" style="text-decoration: underline">under $200k TVL</a> since launch. Overall, since the handouts during The Open League, TON DeFi has been stagnating and slipping further day by day.</p>
+
+          <p>Frankly, that’s logical. I don’t see why users would pick DeFi on TON when, compared to competitors (say, Ethereum), there’s no obvious advantage. TON lags in innovation, incentives, and protocol variety. Stepping back, my sense is that TON DeFi is a couple of years behind the broader space. What we mostly see are copies of big protocols that appear only after they’ve succeeded on EVM/Solana and those clones rarely break out. Why use a thinner, less capable copy when the original is one click away?</p>
+
+          <hr />
+          <p>If you need to know anything about building DeFi on TON - it is really f*cking hard compared to EVM chains. The pain points are everywhere: from integrating with other protocols to the lack of well-polished developer tools on TON, which trail ETH standards by a lot. At one point I had to write a sizable layer on top of <i>blueprint</i> - TON’s Hardhat analogue, just to make basic things usable</p>
+
+          <p>Beyond developer experience, <a href="/blog/ston-dedust.html#ton-arch" target="_blank" rel="noopener" style="text-decoration: underline">TON itself isn’t really built for DeFi</a> because it’s asynchronous. On EVM chains, transactions execute in a strict queue; here, that’s not how it works. And ultimately, with an asynchronous architecture, flash loans are impossible. That may sound like a niche feature, but in EVM DeFi they’re widely used: in fact, a recent example is YieldBasis, <a href="https://docs.yieldbasis.com/user/advanced-concepts-economics#12-highlevel-sequence" target="_blank" rel="noopener" style="text-decoration: underline">which relies on flash loans to help maintain its work</a>.</p>
+          
+          <hr />
+          <p>However, what’s a problem for DeFi becomes a major advantage for payments. TON’s architecture is literally built for scale and if you take the whitepaper at face value :) - can handle huge volumes of transfers, because there’s no global queue and transactions are processed in parallel.</p>
+
+          <p>What’s more, the so-called exclusive partnership between TON and Telegram should amplify this. I’ve never bought into the idea of “DeFi adoption for retail”. DeFi is complex and fussy, and there’s a 99% chance regular users will lose money rather than make it. Even something that seems simple, like LP, causes the <a href="https://mirror.xyz/0xA3DB621697fBC0dA0b16160eb8E201E1a763D2c1/SI9A-eRE8g7gy0oDbqChl1mOm6JwBriimDq29VE4O58" target="_blank" rel="noopener" style="text-decoration: underline">overwhelming majority to lose money</a> - and DeFi is much more than just liquidity provision. Plain money transfers are something everyone needs: people open their banking apps almost daily to send funds. When governments finally allow paying for everyday goods with crypto, TON would be an ideal candidate to fill that payments niche.</p>
+
+          <hr />
+          <p>To sum up: even though Tron is an outdated and very expensive chain, it keeps going because people are used to it and it’s supported everywhere, and I think TON should compete with TRON for the payments and transfers market, rather than trying to shoehorn a DeFi narrative that ordinary users don’t need.</p>
+
+          <hr />
+          <p class="muted">
+            <a href="/stuff.html">← Back to Stuff</a>
+          </p>
+        </article>
+      </main>
+
+      <footer>© 2025 Ramil Amirov</footer>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>David vs. Goliath in the TON Blockchain — Ramil Amirov</title>
+<meta name="description" content="Technical comparison of DeDust and STON.fi on TON: architecture, security, UX, tokenomics, and roadmap." />
+<meta name="color-scheme" content="dark" />
+<style>
+:root { --bg:#000; --text:#fff; --muted:#bdbdbd; --maxw:760px; }
+*,*::before,*::after{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--text);
+font:16px/1.7 ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,Arial,sans-serif}
+a{color:var(--text);text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:40px 18px 80px}
+header{margin-bottom:28px}
+h1{font-size:clamp(28px,4.5vw,40px);font-weight:800;margin:0 0 6px}
+.nav{display:flex;flex-wrap:wrap;align-items:center;gap:12px;color:var(--muted)}
+.nav a{color:var(--text);padding:0}
+.sep{margin:0 4px;line-height:1;opacity:.6;user-select:none}
+.muted{color:var(--muted)}
+article{padding:24px 0}
+article img{max-width:100%;height:auto}
+pre{overflow:auto;padding:12px;background:#0a0a0a;border:1px solid #222;border-radius:10px}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+hr{border:0;border-top:1px solid #161616;margin:22px 0}
+.toc{padding-left:18px;margin:8px 0}
+blockquote{margin:12px 0;padding-left:14px;border-left:3px solid #222;color:var(--muted)}
+footer{color:var(--muted);margin-top:36px}
+table{width:100%;border-collapse:collapse;margin:12px 0}
+th,td{border:1px solid #222;padding:8px;text-align:left}
+th{background:#0a0a0a}
+caption{caption-side:bottom;color:var(--muted);padding-top:6px}
+figure{margin:16px 0}
+figcaption{color:var(--muted);font-size:0.95em;margin-top:6px}
+/* citations */
+sup a{ text-decoration:none; border-bottom:1px dotted #444; padding:0 2px }
+sup a:hover{ text-decoration:underline }
+#references li{ margin:6px 0 }
+#references a.back{ margin-left:8px; font-size:0.9em; color:var(--muted) }
+</style>
+  </head>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // соответствие latex-ключей → номер пункта в твоём списке References
+      const keyToNum = {
+        "zerodust":1,"ston-ceo":2,"nekilov":3,"stonfi":4,"certik-dedust":5,"certik-stonfi":6,
+        "router":7,"router-scan":8,"stonfi-github":9,"tolya":10,"dust":11,"whitepaper":12,
+        "cto":13,"omni":14,"rfq":15,"tep":16,"stonfi-fees":17,"mydune":18,"tfdune":19,
+        "omnibeta":20,"cof":21,"post":22,"uni-token":23
+      };
+    
+      // найдём список References и навесим id вида ref-1, ref-2, ...
+      const refsH2 = [...document.querySelectorAll('h2')]
+        .find(h => h.textContent.trim().toLowerCase() === 'references');
+      if (!refsH2) return;
+      const ol = refsH2.nextElementSibling && refsH2.nextElementSibling.tagName === 'OL'
+        ? refsH2.nextElementSibling : null;
+      if (!ol) return;
+      const items = [...ol.querySelectorAll('li')];
+      items.forEach((li, i) => li.id = `ref-${i+1}`);
+    
+      // заменим \cite{key} → <sup><a href="#ref-N">N</a></sup> (+ уникальные якоря для возвратов)
+      const scope = document.querySelector('article') || document.body;
+      const counts = {};
+      scope.innerHTML = scope.innerHTML.replace(/\\cite\{([^}]+)\}/g, (m, key) => {
+        const n = keyToNum[key];
+        if (!n) return m; // ключ не найден — оставим как есть
+        counts[key] = (counts[key] || 0) + 1;
+        const idx = counts[key];
+        return `<sup id="cite-${key}-${idx}"><a href="#ref-${n}">${n}</a></sup>`;
+      });
+    
+      // добавим «↩︎» назад в каждый пункт референсов (на все места, где он цитировался)
+      Object.keys(counts).forEach(key => {
+        const n = keyToNum[key];
+        const li = document.getElementById(`ref-${n}`);
+        if (!li) return;
+        for (let i = 1; i <= counts[key]; i++) {
+          const a = document.createElement('a');
+          a.href = `#cite-${key}-${i}`;
+          a.className = 'back';
+          a.textContent = '↩︎';
+          li.appendChild(document.createTextNode(' '));
+          li.appendChild(a);
+        }
+      });
+    });
+    </script>
+    
+  <body>
+    <div class="wrap">
+        <header>
+          <h1>Ramil Amirov</h1>
+          <nav class="nav" aria-label="Primary">
+            <a href="/index.html">Home</a><span class="sep">·</span>
+            <a href="/stuff.html">Stuff</a><span class="sep">·</span>
+            <a href="/contact.html">Contact</a>
+          </nav>
+          <p class="muted">
+            <time datetime="2025-10-08">2025-01-08</time> - David vs. Goliath in the TON Blockchain
+          </p>
+        </header>
+      <main>
+        <article>
+          <h1>A Technical Comparison of DeDust and STON.fi</h1>
+          <h2>Abstract</h2>
+          <p>This paper presents a technical comparison of two decentralized exchanges (DEXs) on the TON blockchain: DeDust and STON.fi. Through an analysis of architecture, tokenomics, user experience, and security, we aim to provide a comprehensive evaluation of these platforms. </p>
+          <p>The Introduction includes an overview of the TON blockchain’s asynchronous design and its implications for token and smart contract interactions. This foundational context is necessary for understanding the technical challenges and design decisions of DEXs operating in the TON ecosystem. By focusing on user-centric metrics such as average swap times, fees, and APY, this research seeks to highlight the practical differences between the two protocols, providing valuable insights for both users and developers.</p>
+
+          <h2 id = "ton-arch">Introduction or TON architecture</h2>
+          <p>You cannot compare DEXs on the TON network without first understanding the nuances of the blockchain. I will do my best to explain this briefly, but if any questions remain, I recommend looking deeper into these topic before continuing with this article.</p>
+          <p>The main difference between TON and EVM-based blockchains is that TON is an asynchronous blockchain. To illustrate this, let’s compare the flow of transactions in Ethereum and TON. First, let’s define a “transaction” in this context as one or more method calls across one or more smart contracts.</p>
+          <p>In Ethereum, once a transaction starts executing, no other transactions can execute at the same time. Essentially, transactions form a queue, where each one must finish before the next begins. Thus, if our transaction calls two different contracts, those calls will be executed one after the other, without interleaving calls from other transactions in between. This approach is straightforward and has certain advantages, but it does not scale well.</p>
+          <p>To address this limitation, TON was designed as an asynchronous blockchain. There is no strict transaction queue and no fixed order of execution. Returning to our previous example, in TON, any state changes could occur in between the two contract calls in the same transaction. This approach adds new complexities and potential pitfalls, but it solves the scalability issue by allowing many transactions to run in parallel.</p>
+          <p>First, it’s important to understand the concept of asynchronicity in TON. When the TON network experiences heavy load, it splits into two parallel chains. All smart contracts from the original chain are then distributed across these two new chains. If one of those chains becomes overloaded, it will split again, and so on. Once the load decreases, these chains merge back together into fewer chains.</p>
+          <p>Now, let’s recall what a token is in an EVM-based blockchain. Simply put, a token is usually just a single contract holding balances for all users and containing transfer methods. In synchronous blockchains like Ethereum, this is perfectly fine. Even if many users are transferring the same token, they simply call the transfer method on that contract, and everything continues to function as expected.</p>
+          <p>In TON, however, if we tried to implement a token as a single contract with all the balances and transfer logic, we would put a tremendous load on that one address. The TON blockchain would detect this load and attempt to split. But since all the calls related to that contract would go to the same shardchain (the new chain created in the splitting process), the load would remain concentrated in that shardchain. Repeated splitting would not alleviate the situation, leading that shardchain to either slow down significantly or even become unable to produce blocks efficiently. As a result, all token transfers would become extremely slow.</p>
+
+          <h2>Architecture</h2>
+          <p>First, let's explore the architecture of the STON.fi protocol. Its structure is similar to that of many familiar decentralized exchanges (DEXs) built on Ethereum Virtual Machine (EVM) blockchains. In this setup, the DEX is composed of a liquidity pool manager (router) and the liquidity pools themselves. All trades within the DEX are routed through this manager, which, given the low load on the blockchain, allows users to perform swaps quickly and efficiently.</p>
+          <p>But as I mentioned in the <i>Introduction</i>, having a single contract that processes a large volume of messages is a bad idea in TON. STON.fi v1 experienced precisely this issue. In the second version of their protocol, STON.fi introduced multiple routers across different shards. When a new liquidity pool is created, the protocol selects a router in such a way that the router, its jetton wallets, and the pool itself all reside within the same shard. This optimization allows swaps to execute faster since multiple transaction steps can be completed within a single block.\cite{ston-ceo}</p>
+          <p>However, this design comes at the cost of increased complexity for users and developers. STON.fi's architecture dynamically distributes pools and routers across shards. While this makes certain performance optimizations possible, it also introduces additional considerations in terms of usability and liquidity fragmentation.</p>
+          <p>It is also worth noting a significant drawback in STON.fi’s architecture: not only do all DEX-related transactions pass through a single router contract, but each transaction typically goes through it at least twice. This design choice creates a “bottleneck” situation, potentially impacting network efficiency and scalability.</p>
+          <figure>
+            <img src="ston-dedust-recources/ston.png" alt="STON.fi swap flow" />
+            <figcaption>STON.fi swap flow</figcaption>
+          </figure>
+          <p>The main question is: how does one determine which DEX instance a given jetton should be assigned to? STON.fi solves this issue by simulating the creation of a pool on their backend, selecting the best option from those they manage to calculate.\cite{ston-ceo}</p>
+          <p>On the other hand, the architecture of DeDust is fundamentally different.
+Unlike STON.fi, it does not rely on a single entry point, and overall, its DEX logic aligns more closely with how the TON blockchain is designed to operate. DeDust has created separate vaults for each type of asset (including the native TON currency, which it supports directly, without wrapping). In contrast, STON.fi does not natively handle TON and instead wraps it into a pTON token. This is likely not the optimal solution, as it introduces issues with transaction parsing and increases transaction costs.</p>
+          <p>Consequently, a user only interacts with these vaults, either by depositing tokens or withdrawing them. With this approach, the architecture is more resilient for an asynchronous blockchain. It is also worth mentioning that during any user transaction, interaction with any vault occurs only once, which is more efficient than STON.fi's approach (where the router processes 2 or more messages per transaction). This is a better solution, as it reduces the pressure on the shardchain, resulting in improved scalability and performance.</p>
+          <figure>
+            <img src="ston-dedust-recources/dedust.png" alt="DeDust swap flow" />
+            <figcaption>DeDust swap flow</figcaption>
+          </figure>
+          <p>However, an observant reader may notice a potential issue. The TON blockchain frequently encounters challenges during airdrop events, where a large number of users simultaneously try to sell their tokens and send numerous transactions to the DEX. In such cases, the vault of the token being sold becomes overloaded, resulting in transaction queues. This, in turn, slows down swaps for that token and, in the worst-case scenario, completely overwhelms the shard, throwing the blockchain into chaos.</p>
+          <p>Currently, this problem has been mitigated at the blockchain level by introducing a dispatch queue mechanism.\cite{tep} This update reduces the impact of a single contract on the shard, preventing such bottlenecks, and improving overall stability. </p>
+          <p>To conclude the analysis of architecture, I would like to reference a post by Anatoly Makosov\cite{tolya}, one of the core developers of the TON blockchain, written a month before the release of STON.fi's v2. Despite its timing, I believe the insights shared in this post remain relevant. In it, Makosov discusses the challenges faced by DEXs and concludes that DeDust's architecture is the superior approach. Additionally, it is worth noting that the DEX aggregator <i>swap.coffee</i> is currently building its own DEX, and its architecture appears to be more similar to DeDust’s approach rather than STON.fi’s.\cite{cof} This trend may influence the community’s perception of which architectural model is best suited for TON’s asynchronous environment.</p>
+
+          <h2>Security</h2>
+          <p>A significant drawback of DeDust is its unverified smart contracts and the lack of any publicly available code for the community. This naturally raises concerns among users. Especially considering that DeDust has no technical restrictions preventing them from updating their smart contracts and potentially withdrawing all user funds\cite{zerodust}.</p>
+          <p>Another important point is that DeDust had only two developers\cite{nekilov}, which increases the likelihood of errors compared to STON.fi, where the technical team is much larger and a significant amount of code reviews are conducted\cite{stonfi}. Users may feel more comfortable investing their funds in the more academic approach of STON.fi, as opposed to the fast-paced development of DeDust. However, the technical team of DeDust has recently grown, while, according to some sources, the DEX core of STON.fi was written by a single developer. This might raise concerns for some readers as well.</p>
+          <p>However, DeDust has passed two audits from prominent auditing companies, CertiK\cite{certik-dedust} and Zellic\cite{zerodust}, which is obviously a positive aspect. Despite the unfinished status of the CertiK audit, the DeDust protocol team has already implemented all the recommended changes from the preliminary report\cite{zerodust}.</p>
+          <p>Let's continue with STON.fi: it has a setup where only the router contract can be upgraded\cite{router}, which seems like a security advantage. However, user funds are still stored in the router contract\cite{router-scan}, meaning there are no strict technical limitations preventing the STON.fi team from withdrawing those funds.</p>
+          <p>On the other hand, STON.fi gains points for having undergone three audits by CertiK\cite{certik-stonfi} and for publicly sharing the code of the first version of its protocol\cite{stonfi-github}. Although the second version’s code is currently neither verified nor published on GitHub, this still provides more transparency compared to the total lack of publicly available information from DeDust.</p>
+
+          <h2>User Experience</h2>
+          <p>Let’s begin by comparing the conditions offered by each DEX. Below is a table summarizing the standard swap fees:</p>
+          <table>
+            <thead>
+              <tr>
+                <th>DEX</th>
+                <th>Standard Swap Fees</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>DeDust</td><td>0.25% → 0.20% to LPs, 0.05% to DUST staking</td></tr>
+              <tr><td>STON.fi</td><td>0.30% → 0.20% to LPs, 0.10% to protocol</td></tr>
+            </tbody>
+          </table>
+          <p><strong>NB:</strong> Protocols occasionally adjust their fees in specific pools, for example, at the request of token creators or under certain conditions. At the time of writing, DeDust had temporarily reduced fees in its TON/USDT pool to minimize the spread during a farming period.\cite{zerodust} </p>
+          <p>After analyzing the fees offered by the protocols, we can conclude that the situation is the same for liquidity providers, as both protocols allocate 0.2% of the fees to them. However, users are charged higher fees on STON.fi, which benefits liquidity providers but is clearly a disadvantage for users.</p>
+          <p>Let’s now analyze some statistics. For example, we’ll compare the tsTON/USDT pool on both DEXs to determine which one offers a better return for an average user. I created a dashboard on Dune\cite{mydune} to visualize APY data, excluding any farming rewards or grants to calculate the pure, natural APY that liquidity providers (LPs) would earn solely from swap fees. </p>
+          <figure>
+            <img src="ston-dedust-recources/image1.png" alt="APY Comparison for the tsTON/USDT Pool on DeDust and STON.fi" />
+            <figcaption>APY Comparison for the tsTON/USDT Pool on DeDust and STON.fi</figcaption>
+          </figure>
+          <p>As we can see from the chart, the APY on DeDust has been higher for the majority of the time. </p>
+
+          <h3>Liquidity Incentive Mechanisms</h3>
+          <p>Another key aspect of user experience is how each DEX incentivizes liquidity providers. STON.fi implements a farming mechanism directly through smart contracts, ensuring that rewards are automatically distributed without manual intervention.\cite{ston-ceo} DeDust, on the other hand, uses a system called boosts, where rewards are distributed via a cumulative merkle tree.</p>
+          <p>DeDust's approach allows for permissionless boosts, whereas STON.fi cannot support this due to the storage limitations of its smart contracts.\cite{ston-ceo} In their case, reward pools are stored in a contract, and STON.fi wouldn’t want people to spam the reward pools with worthless tokens, as this would clog up the contract’s storage.\cite{ston-ceo}</p>
+
+          <h3>Average Swap Time</h3>
+          <p>Let’s now examine the average swap time on these exchanges. How well do our theoretical assumptions from the architecture section align with reality?</p>
+          <figure>
+            <img src="ston-dedust-recources/image2.png" alt="Comparison of Average Swap Time on DeDust and STON.fi" />
+            <figcaption>Comparison of Average Swap Time on DeDust and STON.fi</figcaption>
+          </figure>
+          <p>As we can observe on Figure 4, despite my concerns regarding the architecture of STON.fi’s contracts, their optimizations in the second version have significantly improved transaction speeds. Thanks to their significant reduction in the number of cross-chain messages, swaps under normal conditions are carried out much faster than on DeDust.\cite{ston-ceo} Currently, DeDust processes swaps faster than the first version of STON.fi but slower than the second version.</p>
+          <p>However, my earlier statements about STON.fi’s performance issues under high blockchain load are somewhat validated. While there have not been any extreme loads since the launch of STON.fi v2, even during periods of increased transaction volume, we can see noticeable slowdowns in swap times on STON.fi v2. However, the number of swaps on DeDust and STON.fi differ. The STON.fi team claims that during periods of a sharp increase in swap times, the number of swaps on DeDust was ten times lower\cite{ston-ceo}. To verify this information, I have compiled some analytics on Dune, where interested readers can examine the issue in more detail.\cite{mydune}</p>
+          <p>Additionally, an interested reader can explore various statistics provided by TON Foundation\cite{tfdune}. I chose not to include them in this article, as they do not reflect the direct impact on users, unlike the graphs presented here.</p>
+
+          <h2>Tokenomics</h2>
+          <h3>DeDust (DUST Token)</h3>
+          <p>Formerly known as SCALE, the DUST token uses a fairly standard revenue-sharing model: 20% of all exchange fees are distributed to stakers of the token\cite{dust}. This model has proven effective in other DeFi ecosystems over time. At the moment, there is no DAO or governance structure in place, although the DeDust team claims that new mechanics are on the horizon.\cite{zerodust} </p>
+          <p>It is also worth noting the initial allocation of DUST. DeDust does not have external investors, which often reduces the risk of large sell-offs that can depress token prices. However, the team currently controls 69% of the remaining supply (considering that 20.54% of the tokens have been burned), which raises concerns about centralization and the potential impact on market dynamics.\cite{dust} </p>
+          <p>However, potential investors should keep in mind that a revenue-sharing model may attract the attention of the SEC. The Uniswap DAO has been considering implementing a protocol fee for several years now, but due to the risk that its token could be classified as a security, they have not yet moved forward. Moreover, a recent attempts to activate the protocol fee once again drew the SEC’s attention.\cite{uni-token}</p>
+
+          <h3>STON.fi (STON, GEMSTON, and ARKENSTON Tokens)</h3>
+          <p>STON.fi takes a different approach by issuing three tokens: STON, GEMSTON, and ARKENSTON. STON can be staked to earn two other tokens: </p>
+          <ul>
+            <li><strong>ARKENSTON</strong> – NFT, which represents STON stake, which provides voting power in the STON.fi DAO.</li>
+            <li><strong>GEMSTON</strong> – currently without a direct utility, though the STON.fi team hopes the community will develop use cases over time.</li>
+          </ul>
+          <p>This creates a multi-token ecosystem where STON serves as the primary staking asset, and ARKENSTON governs protocol decisions. Meanwhile, GEMSTON remains a flexible token that may take on additional functions in the future.\cite{whitepaper}
+It is also worth noting that since STON.fi was launched, there have been no governance proposals or votes using the STON.fi DAO. As a result, the practical application of the entire STON.fi token system remains questionable, given the lack of real-world usage. However, the STON.fi team asserts that they are following their whitepaper, albeit with some delay, so both a DAO and token utility are planned.\cite{ston-ceo}</p>
+
+          <h2>Future</h2>
+          <h3>DeDust</h3>
+          <p>Looking ahead, DeDust appears to be moving toward a new version of its DEX that draws inspiration from Uniswap v4 (an industry standard protocol in crypto). Recently, Nick (the founder of DeDust) announced DeDust X\cite{nekilov}, which will allow users to add their own code to DEX contracts, reminiscent of the “hooks” concept introduced in Uniswap v4.</p>
+
+          <h3>STON.fi</h3>
+          <p>STON.fi, on the other hand, is taking a different path. They are currently developing OMNISTON\cite{omni}, which aims to integrate on-chain RFQ resolvers\cite{rfq} with a traditional AMM DEX. This approach is intended to offer the best possible price to end users. At the time of writing, a beta version of the protocol is already available for anyone to try.\cite{omnibeta}
+However, industry professionals have raised questions about how effectively STON.fi will be able to implement this feature in practice\cite{cto}.</p>
+          <p>Additionally, STON.fi has placed a strong focus on building a cross-chain swap service\cite{whitepaper}, though there is currently no information regarding when this functionality will go into production.</p>
+
+          <h2>Conclusion</h2>
+          <p>This study highlights two contrasting approaches on the TON blockchain: DeDust’s decentralized vault design, which aligns well with TON’s asynchronous nature, and STON.fi’s router-based system, which has seen significant optimization in its second version. DeDust addresses scalability by avoiding a single entry point, and it offers what appears to be a simpler and more transparent tokenomics model — 20% of exchange fees are distributed to DUST stakers, and the project lacks external investors who might exert downward pressure on the token price. Meanwhile, STON.fi has introduced multiple tokens (STON, GEMSTON, and ARKENSTON) to power a DAO and broader ecosystem, yet no governance proposals have been held so far, raising questions about the real-world utility of these tokens.</p>
+          <p>On the security side, both DEXs have unverified and upgradeable contracts, enabling their respective teams to withdraw user liquidity if they chose to. This is highly unusual for major DeFi projects on other blockchains, where code verification and trustless smart contracts are the norm. While DeDust and STON.fi have each undergone some level of auditing, the lack of fully verified contracts remains a concern.</p>
+          <p>From a user experience perspective, DeDust has often shown higher APY returns on comparable pools (e.g., tsTON/USDT) and simpler swap flows, whereas STON.fi’s architecture, although improved in version two, may suffer performance bottlenecks under high load. Nonetheless, STON.fi’s broader vision includes cross-chain functionality and OMNISTON, potentially appealing to those seeking advanced DeFi features.</p>
+          <p>In conclusion, neither DEX is without flaws. DeDust’s architecture and tokenomics may be more appealing for users who value simplicity, while STON.fi’s feature-rich ecosystem could attract those looking for a multi-token approach and potential cross-chain opportunities. This comparison underscores the importance of understanding TON’s asynchronous design when evaluating DEX performance, as well as the critical need for greater transparency, full contract verification, and decentralization in the TON ecosystem.</p>
+
+          <h2>References</h2>
+          <ol>
+            <li>Conversation with Nick Nekilov, founder of DeDust. </li>
+            <li>Conversation with Slavik Baranov, co-founder of STON.fi. </li>
+            <li><a href="https://www.youtube.com/watch?v=LcosaYmfQe8" target="_blank" rel="noopener" style="text-decoration: underline">Nick Nekilov's speech at The Gateway 2024.</a></li>
+            <li><a href="https://youtu.be/YVCpaMqbi08?t=5389" target="_blank" rel="noopener" style="text-decoration: underline">Interview with the CMO of STON.fi. </a></li>
+            <li><a href="https://www.certik.org/projects/dedust" target="_blank" rel="noopener" style="text-decoration: underline">CertiK audit status for DeDust.</a></li>
+            <li><a href="https://skynet.certik.com/projects/ston-fi" target="_blank" rel="noopener" style="text-decoration: underline">CertiK audit status for STON.fi. </a></li>
+            <li><a href="https://docs.ston.fi/docs/developer-section/architecture#router" target="_blank" rel="noopener" style="text-decoration: underline">STON.fi documentation page about their architecture.</a></li>
+            <li><a href="https://tonviewer.com/EQCS4UEa5UaJLzOyyKieqQOQ2P9M-7kXpkO5HnP3Bv250cN3?section=tokens" target="_blank" rel="noopener" style="text-decoration: underline">The example of STON.fi router.</a></li>
+            <li><a href="https://github.com/ston-fi/dex-core" target="_blank" rel="noopener" style="text-decoration: underline">STON.fi v1 implementation.</a></li>
+            <li><a href="https://t.me/anatolii_makosov/43" target="_blank" rel="noopener" style="text-decoration: underline">A Telegram post discussing DEX architecture issues by one of the TON core developers.</a></li>
+            <li><a href="https://help.dedust.io/dedust/welcome-to-dedust.io/about-dust" target="_blank" rel="noopener" style="text-decoration: underline">DeDust documentation page about their token</a></li>
+            <li><a href="https://static.ston.fi/whitepaper.pdf" target="_blank" rel="noopener" style="text-decoration: underline">STON.fi whitepaper</a></li>
+            <li><a href="https://youtu.be/14_s5cjMHAw?t=2891" target="_blank" rel="noopener" style="text-decoration: underline">Interview with the CTO of swap.coffee. </a></li>
+            <li><a href="https://docs.ston.fi/docs/developer-section/omniston" target="_blank" rel="noopener" style="text-decoration: underline">STON.fi documentation page about OMNISTON.</a></li>    
+            <li><a href="https://medium.com/bebop-dex/wtf-is-rfq-on-chain-19560e00058b" target="_blank" rel="noopener" style="text-decoration: underline">Article about RFQ from the Bebop.</a></li>
+            <li><a href="https://github.com/ton-blockchain/TEPs/blob/master/text/0160-dispatch-queue.md" target="_blank" rel="noopener" style="text-decoration: underline">TEP description about dispatch queue</a></li>
+            <li><a href="https://docs.ston.fi/docs/user-section/fees" target="_blank" rel="noopener" style="text-decoration: underline">STON.fi documentation page about their fees.</a></li>
+            <li><a href="https://dune.com/ramych/ton-dex-comparison" target="_blank" rel="noopener" style="text-decoration: underline">My Dune dashboard </a></li>
+            <li><a href="https://dune.com/ton_foundation/dex-tvl-stats" target="_blank" rel="noopener" style="text-decoration: underline">TON Dex TVL & LP Dune dashboard by TON Foundation </a></li>
+            <li><a href="https://omniston.ston.fi/" target="_blank" rel="noopener" style="text-decoration: underline">OMNISTONE demo app</a></li>
+            <li><a href="https://docs.swap.coffee/technical-guides/dex/concepts" target="_blank" rel="noopener" style="text-decoration: underline">swap.coffee documentation page about their DEX's concepts</a></li>
+            <li><a href="https://t.me/dedust_dev/7" target="_blank" rel="noopener" style="text-decoration: underline">DeDust post about closure of built-in DeDust referral revenue sharing program</a></li>
+            <li><a href="https://bitpushnews.medium.com/uniswap-sued-by-sec-what-does-it-mean-for-the-future-of-defi-f4ccc5f4a76a" target="_blank" rel="noopener" style="text-decoration: underline">Article about Uniswap's problems with its token and SEC</a></li>
+          </ol>
+
+          <hr />
+          <p class="muted">
+            <a href="/stuff.html">← Back to Stuff</a>
+          </p>
+        </article>
+      </main>
+
+      <footer>© 2025 Ramil Amirov</footer>
+    </div>
+  </body>
+</html>
