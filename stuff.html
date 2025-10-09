@@ -1,31 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Ramil Amirov — About</title>
-    <meta name="description" content="About — concise bullets in the style of gakonst.com/about." />
-    <meta name="color-scheme" content="dark" />
-    <style>
-      :root { --bg:#000; --text:#fff; --muted:#bdbdbd; --maxw:760px; }
-      *,*::before,*::after{box-sizing:border-box}
-      html,body{height:100%}
-      body{margin:0;background:var(--bg);color:var(--text);font:16px/1.7 ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,Arial,sans-serif}
-      a{color:var(--text);text-decoration:none}
-      a:hover{text-decoration:underline}
-      .wrap{max-width:var(--maxw);margin:0 auto;padding:40px 18px 80px}
-      header{margin-bottom:28px}
-      h1{font-size:clamp(28px,4.5vw,40px);font-weight:800;margin:0 0 6px}
-      .nav{color:var(--muted)}
-      .nav a{padding:2px 4px}
-      .sep{padding:0 6px}
-      section{padding:24px 0}
-      h2{font-size:18px;margin:0 0 10px;color:var(--muted);font-weight:700;letter-spacing:.2px}
-      ul{margin:0;padding-left:18px}
-      li{margin:8px 0}
-      footer{color:var(--muted);margin-top:36px}
-    </style>
-  </head>
+<head>
+  <meta name="color-scheme" content="dark light" />
+  <link rel="preload" as="image" href="/images/waifu-dance.gif" />
+  <title>Ramil Amirov — Stuff</title>
+  <script>
+    (function(){
+      try{
+        var saved = localStorage.getItem("theme");
+        var sys = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        var theme = saved || sys || "dark";
+        document.documentElement.dataset.theme = theme;
+        document.documentElement.style.colorScheme = theme;
+      }catch(e){}
+    })();
+  </script>
+  <link rel="stylesheet" href="/assets/theme.css" />
+</head>
   <body>
     <div class="wrap">
       <header>
@@ -46,8 +37,8 @@
           <section>
             <h2>Research & Writing</h2>
           <ul>
-            <li>A Technical Comparison of DeDust and STON.fi (<a href="/blog/ston-dedust.html" target="_blank" rel="noopener" style="text-decoration: underline">David vs. Goliath in the TON blockchain</a>)</li>
-            <li>TON vs TRON (<a href="/blog/tron-ton.html" target="_blank" rel="noopener" style="text-decoration: underline">Compete for Payments, Not DeFi</a>)</li>
+            <li>A Technical Comparison of DeDust and STON.fi (<a href="/blog/ston-dedust.html" style="text-decoration: underline">David vs. Goliath in the TON blockchain</a>)</li>
+            <li>TON vs TRON (<a href="/blog/tron-ton.html" style="text-decoration: underline">Compete for Payments, Not DeFi</a>)</li>
           </ul>
         </section>
       </main>

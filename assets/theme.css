@@ -1,0 +1,89 @@
+/* ===== THEME VARS ===== */
+:root {
+    --bg:#000; --text:#fff; --muted:#bdbdbd; --maxw:760px;
+  
+    /* эффект: pop -> hold -> expand */
+    --reveal-ease: cubic-bezier(.2,.7,0,1);
+    --reveal-pos: center;     /* center | right bottom | 60% 40% */
+  
+    --start-size: 8vmax;      /* стартовая маска (маленькая точка) */
+    --pop-size: 28vmax;       /* до какого размера «вспыхнуть» */
+    --final-size: 150vmax;    /* финальный размер (во весь экран) */
+  
+    --pop-dur: 160ms;         /* быстрое увеличение до pop-size */
+    --hold-dur: 3000ms;       /* пауза для танца гифки (~3s) */
+    --expand-dur: 240ms;      /* быстрый рывок до final-size */
+  }
+  :root[data-theme="light"] { --bg:#fff; --text:#000; --muted:#555; }
+  
+  /* ===== BASE ===== */
+  *,*::before,*::after{ box-sizing:border-box }
+  html,body{ height:100% }
+  body{
+    margin:0; background:var(--bg); color:var(--text);
+    font:16px/1.7 ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,Arial,sans-serif
+  }
+  a{ color:var(--text); text-decoration:none }
+  a:hover{ text-decoration:underline }
+  
+  /* layout helpers */
+  .wrap{ max-width:var(--maxw); margin:0 auto; padding:40px 18px 80px }
+  header{ margin-bottom:28px }
+  h1{ font-size:clamp(28px,4.5vw,40px); font-weight:800; margin:0 0 6px }
+  .nav{ color:var(--muted) }
+  .nav a{ padding:2px 4px }
+  .sep{ padding:0 6px }
+  section{ padding:24px 0 }
+  h2{ font-size:18px; margin:0 0 10px; color:var(--muted); font-weight:700; letter-spacing:.2px }
+  ul{ margin:0; padding-left:18px }
+  li{ margin:8px 0 }
+  footer{ color:var(--muted); margin-top:36px }
+  
+  /* ===== THEME TOGGLE BTN ===== */
+  .theme-btn{
+    display:inline-flex; align-items:center; justify-content:center;
+    width:36px; height:36px; border:1px solid #222; border-radius:10px;
+    background:transparent; color:var(--text); cursor:pointer;
+  }
+  .theme-btn:hover{ background:#0f0f0f }
+  :root[data-theme="light"] .theme-btn:hover{ background:#f5f5f5 }
+  
+  /* ===== VIEW TRANSITIONS MASK (GIF): 2-stage ===== */
+  ::view-transition-group(root){ animation-timing-function: var(--reveal-ease); }
+  ::view-transition-old(root){ animation:none; z-index:-1; }
+  
+  /* новая тема проявляется через гиф-маску в две фазы */
+  :root[data-theme="dark"]::view-transition-new(root),
+  :root[data-theme="light"]::view-transition-new(root){
+    -webkit-mask: url(/images/waifu-dance.gif) var(--reveal-pos) / var(--start-size) no-repeat;
+            mask: url(/images/waifu-dance.gif) var(--reveal-pos) / var(--start-size) no-repeat;
+    /* 1) быстрый «поп», 2) через hold — быстрый «экспанд» */
+    animation:
+      vt-pop var(--pop-dur) var(--reveal-ease) both,
+      vt-expand var(--expand-dur) var(--reveal-ease) var(--hold-dur) both;
+  }
+  
+  @keyframes vt-pop{
+    to{
+      -webkit-mask-size: var(--pop-size);
+              mask-size: var(--pop-size);
+    }
+  }
+  @keyframes vt-expand{
+    from{
+      -webkit-mask-size: var(--pop-size);
+              mask-size: var(--pop-size);
+    }
+    to{
+      -webkit-mask-size: var(--final-size);
+              mask-size: var(--final-size);
+    }
+  }
+  
+  /* respect reduced motion */
+  @media (prefers-reduced-motion: reduce){
+    ::view-transition-group(root),
+    ::view-transition-new(root),
+    ::view-transition-old(root){ animation:none !important; }
+  }
+  

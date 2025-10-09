@@ -1,55 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>David vs. Goliath in the TON Blockchain — Ramil Amirov</title>
-<meta name="description" content="Technical comparison of DeDust and STON.fi on TON: architecture, security, UX, tokenomics, and roadmap." />
-<meta name="color-scheme" content="dark" />
-<style>
-:root { --bg:#000; --text:#fff; --muted:#bdbdbd; --maxw:760px; }
-*,*::before,*::after{box-sizing:border-box}
-html,body{height:100%}
-body{margin:0;background:var(--bg);color:var(--text);
-font:16px/1.7 ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,Arial,sans-serif}
-a{color:var(--text);text-decoration:none}
-a:hover{text-decoration:underline}
-.wrap{max-width:var(--maxw);margin:0 auto;padding:40px 18px 80px}
-header{margin-bottom:28px}
-h1{font-size:clamp(28px,4.5vw,40px);font-weight:800;margin:0 0 6px}
-article [id] { scroll-margin-top: 16px; }
-:target {
-  animation: anchor-flash 4000ms ease-out 1;
-  border-radius: 8px;
-}
-@keyframes anchor-flash {
-  from { background: rgba(255, 214, 10, .25); box-shadow: 0 0 0 2px rgba(255,214,10,.35) inset; }
-  to   { background: transparent;            box-shadow: 0 0 0 0   transparent     inset; }
-}
-.nav{display:flex;flex-wrap:wrap;align-items:center;gap:12px;color:var(--muted)}
-.nav a{color:var(--text);padding:0}
-.sep{margin:0 4px;line-height:1;opacity:.6;user-select:none}
-.muted{color:var(--muted)}
-article{padding:24px 0}
-article img{max-width:100%;height:auto}
-pre{overflow:auto;padding:12px;background:#0a0a0a;border:1px solid #222;border-radius:10px}
-code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
-hr{border:0;border-top:1px solid #161616;margin:22px 0}
-.toc{padding-left:18px;margin:8px 0}
-blockquote{margin:12px 0;padding-left:14px;border-left:3px solid #222;color:var(--muted)}
-footer{color:var(--muted);margin-top:36px}
-table{width:100%;border-collapse:collapse;margin:12px 0}
-th,td{border:1px solid #222;padding:8px;text-align:left}
-th{background:#0a0a0a}
-caption{caption-side:bottom;color:var(--muted);padding-top:6px}
-figure{margin:16px 0}
-figcaption{color:var(--muted);font-size:0.95em;margin-top:6px}
-/* citations */
-sup a{ text-decoration:none; border-bottom:1px dotted #444; padding:0 2px }
-sup a:hover{ text-decoration:underline }
-#references li{ margin:6px 0 }
-#references a.back{ margin-left:8px; font-size:0.9em; color:var(--muted) }
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>David vs. Goliath in the TON Blockchain</title>
+  <meta name="description" content="Technical comparison of DeDust and STON.fi on TON." />
+
+  <!-- важно: обе палитры -->
+  <meta name="color-scheme" content="dark light" />
+
+  <!-- прелоад гифки для маски -->
+  <link rel="preload" as="image" href="/images/waifu-dance.gif" />
+
+  <!-- ранняя инициализация темы до отрисовки -->
+  <script>
+    (function(){
+      try{
+        var saved = localStorage.getItem("theme");
+        var sys = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        var theme = saved || sys || "dark";
+        document.documentElement.dataset.theme = theme;
+        document.documentElement.style.colorScheme = theme;
+      }catch(e){}
+    })();
+  </script>
+
+  <!-- общие стили -->
+  <link rel="stylesheet" href="/assets/theme.css" />
+  <link rel="stylesheet" href="/assets/prose.css" />
+</head>
+</html>
+
   </head>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
@@ -259,5 +240,6 @@ However, industry professionals have raised questions about how effectively STON
 
       <footer>© 2025 Ramil Amirov</footer>
     </div>
+    <script src="/assets/theme.js" defer></script>
   </body>
 </html>
