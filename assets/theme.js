@@ -39,81 +39,61 @@
     }
   
     // ---------- iOS fallback: overlay + clip-path (pop -> hold -> expand) ----------
-    function switchThemeWithOverlay() {
-      var root = document.documentElement;
-      var next = root.dataset.theme === "light" ? "dark" : "light";
+    // ---------- iOS fallback: overlay WITH GIF MASK (pop -> hold -> expand) ----------
+function switchThemeWithOverlay() {
+    var root = document.documentElement;
+    var next = root.dataset.theme === "light" ? "dark" : "light";
   
-      // читаем токены из CSS
-      var cs = getComputedStyle(root);
-      var pos = cs.getPropertyValue("--reveal-pos").trim() || "50% 50%";
-      var startSize = cs.getPropertyValue("--start-size").trim() || "8vmax";
-      var popSize   = cs.getPropertyValue("--pop-size").trim()   || "28vmax";
-      var finalSize = cs.getPropertyValue("--final-size").trim() || "150vmax";
-      var popDur    = cs.getPropertyValue("--pop-dur").trim()    || "160ms";
-      var holdDur   = cs.getPropertyValue("--hold-dur").trim()   || "3000ms";
-      var expandDur = cs.getPropertyValue("--expand-dur").trim() || "240ms";
-      var ease      = cs.getPropertyValue("--reveal-ease").trim()|| "cubic-bezier(.2,.7,0,1)";
+    // читаем токены из CSS
+    var cs = getComputedStyle(root);
+    var pos       = cs.getPropertyValue("--reveal-pos").trim()    || "50% 50%";
+    var startSize = cs.getPropertyValue("--start-size").trim()    || "8vmax";
+    var popSize   = cs.getPropertyValue("--pop-size").trim()      || "28vmax";
+    var finalSize = cs.getPropertyValue("--final-size").trim()    || "150vmax";
+    var popDur    = cs.getPropertyValue("--pop-dur").trim()       || "160ms";
+    var holdDur   = cs.getPropertyValue("--hold-dur").trim()      || "3000ms";
+    var expandDur = cs.getPropertyValue("--expand-dur").trim()    || "240ms";
+    var ease      = cs.getPropertyValue("--reveal-ease").trim()   || "cubic-bezier(.2,.7,0,1)";
   
-      // текущий фон (старой темы)
-      var oldBg = cs.getPropertyValue("--bg").trim() || "#000";
+    // цвет НОВОЙ темы — оверлей закрасит экран новой палитрой,
+    // а "дырку" в форме gif покажет через маску
+    root.dataset.theme = next; // применим новый набор переменных, но спрячем его оверлеем
+    root.style.colorScheme = next;
+    try { localStorage.setItem("theme", next); } catch (e) {}
   
-      // Overlay: закрывает экран старым фоном, с дыркой-окном по clip-path
-      var overlay = document.createElement("div");
-      overlay.style.position = "fixed";
-      overlay.style.inset = "0";
-      overlay.style.zIndex = "2147483646"; // поверх всего
-      overlay.style.pointerEvents = "none";
-      overlay.style.background = oldBg;
-      overlay.style.clipPath = `circle(${startSize} at ${pos})`;
-      overlay.style.webkitClipPath = overlay.style.clipPath;
-      document.body.appendChild(overlay);
+    var newBg = getComputedStyle(root).getPropertyValue("--bg").trim() || "#fff";
   
-      // Гифка поверх оверлея
-      var img = document.createElement("img");
-      img.src = "/images/waifu-dance.gif";
-      img.alt = "";
-      img.decoding = "async";
-      img.style.position = "fixed";
-      img.style.zIndex = "2147483647";
-      img.style.pointerEvents = "none";
-      img.style.left = "50%";
-      img.style.top = "50%";
-      img.style.transform = "translate(-50%, -50%)";
-      // хочешь — зафиксируй размер (например, 220px):
-      // img.style.width = "220px";
-      document.body.appendChild(img);
+    // overlay с gif-маской
+    var overlay = document.createElement("div");
+    overlay.style.position = "fixed";
+    overlay.style.inset = "0";
+    overlay.style.zIndex = "2147483646";
+    overlay.style.pointerEvents = "none";
+    overlay.style.background = newBg;
   
-      // включаем класс для плавных локальных перекрасок таблиц и т.п.
-      root.classList.add("theme-animating");
+    // маска — сама gif (анимированная)
+    var maskDecl = `url(/images/waifu-dance.gif) ${pos} / ${startSize} no-repeat`;
+    overlay.style.webkitMask = maskDecl;
+    overlay.style.mask = maskDecl;
   
-      // 1) быстрый POP до среднего окна
-      overlay.style.transition = `clip-path ${popDur} ${ease}`;
-      overlay.style.webkitTransition = overlay.style.transition;
-      requestAnimationFrame(function(){
-        overlay.style.clipPath = `circle(${popSize} at ${pos})`;
-        overlay.style.webkitClipPath = overlay.style.clipPath;
-      });
+    // две анимации (используют те же @keyframes vt-pop/vt-expand из theme.css)
+    overlay.style.animation =
+      `vt-pop ${popDur} ${ease} both, vt-expand ${expandDur} ${ease} ${holdDur} both`;
   
-      // 2) на старте HOLD включаем НОВУЮ тему под оверлеем
-      // (пользователь ещё видит старую, кроме «окна» с гифкой)
-      setTimeout(function(){
-        applyTheme(next);
-      }, parseTime(popDur));
+    // подстрахуем локальные плавные перекраски
+    root.classList.add("theme-animating");
+    document.body.appendChild(overlay);
   
-      // 3) EXPAND — быстро раскрываем окно на весь экран, затем убираем оверлей и гифку
-      setTimeout(function(){
-        overlay.style.transition = `clip-path ${expandDur} ${ease}`;
-        overlay.style.webkitTransition = overlay.style.transition;
-        overlay.style.clipPath = `circle(${finalSize} at ${pos})`;
-        overlay.style.webkitClipPath = overlay.style.clipPath;
+    // финальный cleanup
+    var total = parseTime(popDur) + parseTime(holdDur) + parseTime(expandDur);
+    setTimeout(function () {
+      root.classList.remove("theme-animating");
+      overlay.remove();
+    }, total + 50);
   
-        var cleanupDelay = Math.max(parseTime(expandDur), 260);
-        setTimeout(function(){
-          root.classList.remove("theme-animating");
-          img.remove(); overlay.remove();
-        }, cleanupDelay);
-      }, parseTime(popDur) + parseTime(holdDur));
-    }
+    function parseTime(s){ return Number(String(s).replace(/[^0-9.]/g,"")) || 0; }
+  }
+  
   
     // утилита: "160ms" -> 160
     function parseTime(s){ return Number(String(s).replace(/[^0-9.]/g,"")) || 0; }
