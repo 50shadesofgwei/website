@@ -115,3 +115,15 @@
     }
   }
   
+  /* iOS fallback animations: waifu pop + final disk expand */
+:root{ --ios-waifu-size: 200px; }
+@media (max-width:420px){ :root{ --ios-waifu-size: 164px; } }
+
+@keyframes ios-waifu-pop {
+  from { transform: translate(-50%,-50%) scale(.6); }
+  to   { transform: translate(-50%,-50%) scale(1); }
+}
+@keyframes ios-disk-expand {
+  from { width: var(--pop-size); height: var(--pop-size); }
+  to   { width: var(--final-size); height: var(--final-size); }
+}

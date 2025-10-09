@@ -37,8 +37,7 @@
       root.style.colorScheme = next;
       try { localStorage.setItem("theme", next); } catch (e) {}
     }
-  
-// iOS fallback: GIF hole (xor) -> pop (fast) -> hold -> expand (fast)
+ // iOS fallback: поверх страницы только гифка → поп → 3s → быстрый диск + смена темы
 function switchThemeWithOverlay() {
     var root = document.documentElement;
     var curr = root.dataset.theme === "light" ? "light" : "dark";
@@ -46,65 +45,72 @@ function switchThemeWithOverlay() {
   
     // читаем токены
     var cs = getComputedStyle(root);
-    var pos       = (cs.getPropertyValue("--reveal-pos")   || "50% 50%").trim();
-    var startSize = (cs.getPropertyValue("--start-size")   || "8vmax").trim();
-    var popSize   = (cs.getPropertyValue("--pop-size")     || "28vmax").trim();
-    var finalSize = (cs.getPropertyValue("--final-size")   || "150vmax").trim();
-    var popDur    = (cs.getPropertyValue("--pop-dur")      || "160ms").trim();
-    var holdDur   = (cs.getPropertyValue("--hold-dur")     || "3000ms").trim();
-    var expandDur = (cs.getPropertyValue("--expand-dur")   || "240ms").trim();
-    var ease      = (cs.getPropertyValue("--reveal-ease")  || "cubic-bezier(.2,.7,0,1)").trim();
+    var pos       = (cs.getPropertyValue("--reveal-pos") || "50% 50%").trim();
+    var popDur    = (cs.getPropertyValue("--pop-dur") || "160ms").trim();
+    var holdDur   = (cs.getPropertyValue("--hold-dur") || "3000ms").trim();
+    var expandDur = (cs.getPropertyValue("--expand-dur") || "240ms").trim();
+    var ease      = (cs.getPropertyValue("--reveal-ease") || "cubic-bezier(.2,.7,0,1)").trim();
+    var popSize   = (cs.getPropertyValue("--pop-size") || "28vmax").trim();
   
-    // текущий фон старой темы — закрасим им внешнюю область
-    var currBg = cs.getPropertyValue("--bg").trim() || (curr === "dark" ? "#000" : "#fff");
-  
-    // overlay: старый фон + маска-дырка по форме GIF
+    // контейнер-оверлей без фона (ничего не закрывает)
     var overlay = document.createElement("div");
     overlay.style.position = "fixed";
     overlay.style.inset = "0";
     overlay.style.zIndex = "2147483646";
     overlay.style.pointerEvents = "none";
-    overlay.style.background = currBg;
-  
-    // две маски: [полный прямоугольник] XOR [GIF] = "дырка"
-    var full = "linear-gradient(#fff,#fff)";
-    var gif  = "url(/images/waifu-dance.gif)";
-    overlay.style.webkitMaskImage    = `${full}, ${gif}`;
-    overlay.style.webkitMaskComposite= "xor";
-    overlay.style.webkitMaskRepeat   = "no-repeat, no-repeat";
-    overlay.style.webkitMaskPosition = `0 0, ${pos}`;
-    overlay.style.webkitMaskSize     = `auto, ${startSize}`;
-    // стандартные свойства на будущее
-    overlay.style.maskImage    = `${full}, ${gif}`;
-    overlay.style.maskComposite= "exclude";
-    overlay.style.maskRepeat   = "no-repeat, no-repeat";
-    overlay.style.maskPosition = `0 0, ${pos}`;
-    overlay.style.maskSize     = `auto, ${startSize}`;
-  
     document.body.appendChild(overlay);
   
-    // Включаем НОВУЮ тему под оверлеем сразу — через «дырку» видно текст/фон новой темы
-    root.dataset.theme = next;
-    root.style.colorScheme = next;
-    try { localStorage.setItem("theme", next); } catch (e) {}
+    // 1) ВАЙФУ поверх страницы, танцует 3s. Цвет зависит от направления.
+    var img = new Image();
+    img.src = "/images/waifu-dance.gif";
+    img.alt = "";
+    img.decoding = "async";
+    img.style.position = "fixed";
+    img.style.left = pos.split(" ")[0] || "50%";
+    img.style.top  = pos.split(" ")[1] || "50%";
+    img.style.transform = "translate(-50%,-50%) scale(.6)";
+    img.style.width = "var(--ios-waifu-size)";
+    img.style.height = "auto";
+    img.style.zIndex = "2147483647";
+    img.style.pointerEvents = "none";
+    // белая на тёмный → оставляем; чёрная на светлый → invert
+    img.style.filter = next === "dark" ? "invert(1)" : "none";
+    overlay.appendChild(img);
   
-    // локальные плавные перекраски (таблицы и т.п.)
-    root.classList.add("theme-animating");
+    // быстрый POP до среднего размера
+    img.style.animation = `ios-waifu-pop ${popDur} ${ease} both`;
   
-    // АНИМАЦИИ ЧЕРЕЗ CSS KEYFRAMES (см. ios-pop / ios-expand в theme.css)
-    overlay.style.animation =
-      `ios-pop ${popDur} ${ease} both, ios-expand ${expandDur} ${ease} ${holdDur} both`;
+    // 2) через hold запускаем быстрый EXPAND диском нового фона и переключаем тему
+    setTimeout(function () {
+      var disk = document.createElement("div");
+      disk.style.position = "fixed";
+      disk.style.left = img.style.left;
+      disk.style.top  = img.style.top;
+      disk.style.transform = "translate(-50%,-50%)";
+      disk.style.width = popSize;
+      disk.style.height = popSize;
+      disk.style.borderRadius = "50%";
+      disk.style.background = "var(--bg)"; // всегда берём из активной темы
+      disk.style.zIndex = "2147483646";    // под гифкой, но над контентом
+      overlay.appendChild(disk);
   
-    // уборка
-    var total =
-      parseTime(popDur) + parseTime(holdDur) + parseTime(expandDur) + 80;
-    setTimeout(function(){
-      root.classList.remove("theme-animating");
-      overlay.remove();
-    }, total);
+      // переключаем тему ровно с началом экспанда — цвет диска автоматически станет новым
+      root.dataset.theme = next;
+      root.style.colorScheme = next;
+      try { localStorage.setItem("theme", next); } catch (e) {}
   
-    function parseTime(s){ return Number(String(s).replace(/[^0-9.]/g,"")) || 0; }
+      // быстрый рывок до финала
+      disk.style.animation = `ios-disk-expand ${expandDur} ${ease} both`;
+  
+      // убираем всё чуть позже
+      setTimeout(function () {
+        overlay.remove();
+      }, parseMs(expandDur) + 60);
+    }, parseMs(popDur) + parseMs(holdDur));
+  
+    function parseMs(s){ return Number(String(s).replace(/[^0-9.]/g,"")) || 0; }
   }
+  
   
   
   
