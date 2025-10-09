@@ -1,32 +1,47 @@
 /* ===== THEME VARS ===== */
-:root {
+:root{
     --bg:#000; --text:#fff; --muted:#bdbdbd; --maxw:760px;
   
-    /* эффект: pop -> hold -> expand */
+    /* theme toggle animation (desktop / Chromium via View Transitions) */
     --reveal-ease: cubic-bezier(.2,.7,0,1);
-    --reveal-pos: center;     /* center | right bottom | 60% 40% */
+    --reveal-pos: 50% 50%;      /* center point for the effect */
+    --start-size: 8vmax;        /* tiny seed */
+    --pop-size: 28vmax;         /* first "pop" size */
+    --final-size: 150vmax;      /* final full-screen size */
+    --pop-dur: 160ms;
+    --hold-dur: 3000ms;         /* dancing time */
+    --expand-dur: 240ms;
   
-    --start-size: 8vmax;      /* стартовая маска (маленькая точка) */
-    --pop-size: 28vmax;       /* до какого размера «вспыхнуть» */
-    --final-size: 150vmax;    /* финальный размер (во весь экран) */
+    /* iOS fallback sizing */
+    --ios-waifu-size: 200px;
   
-    --pop-dur: 160ms;         /* быстрое увеличение до pop-size */
-    --hold-dur: 3000ms;       /* пауза для танца гифки (~3s) */
-    --expand-dur: 240ms;      /* быстрый рывок до final-size */
+    /* optional tokens used by prose.css (tables, rules) */
+    --rule:#161616;
+    --border:#222;
+    --surface:#0a0a0a;
+    --table-bg: transparent;
+    --table-head-bg: rgba(0,0,0,.6);
+    --table-border: #161616;
+    --table-hover-bg: #0a0a0a;
   }
-  :root[data-theme="light"] { --bg:#fff; --text:#000; --muted:#555; }
+  :root[data-theme="light"]{
+    --bg:#fff; --text:#000; --muted:#555;
+    --table-head-bg: rgba(255,255,255,.85);
+    --table-border:#e5e5e5;
+    --table-hover-bg:#f6f6f6;
+  }
   
   /* ===== BASE ===== */
   *,*::before,*::after{ box-sizing:border-box }
   html,body{ height:100% }
   body{
     margin:0; background:var(--bg); color:var(--text);
-    font:16px/1.7 ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,Arial,sans-serif
+    font:16px/1.7 ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,
+         Cantarell,Noto Sans,Arial,sans-serif;
   }
   a{ color:var(--text); text-decoration:none }
   a:hover{ text-decoration:underline }
   
-  /* layout helpers */
   .wrap{ max-width:var(--maxw); margin:0 auto; padding:40px 18px 80px }
   header{ margin-bottom:28px }
   h1{ font-size:clamp(28px,4.5vw,40px); font-weight:800; margin:0 0 6px }
@@ -39,7 +54,7 @@
   li{ margin:8px 0 }
   footer{ color:var(--muted); margin-top:36px }
   
-  /* ===== THEME TOGGLE BTN ===== */
+  /* Theme toggle button */
   .theme-btn{
     display:inline-flex; align-items:center; justify-content:center;
     width:36px; height:36px; border:1px solid #222; border-radius:10px;
@@ -48,21 +63,23 @@
   .theme-btn:hover{ background:#0f0f0f }
   :root[data-theme="light"] .theme-btn:hover{ background:#f5f5f5 }
   
-  /* ===== VIEW TRANSITIONS MASK (GIF): 2-stage ===== */
+  /* smooth local recolor (e.g., tables) during toggle */
+  .theme-animating, .theme-animating *{
+    transition: background-color .25s ease, border-color .25s ease, color .25s ease !important;
+  }
+  
+  /* ===== DESKTOP: View Transitions with GIF mask (2-stage) ===== */
   ::view-transition-group(root){ animation-timing-function: var(--reveal-ease); }
   ::view-transition-old(root){ animation:none; z-index:-1; }
   
-  /* новая тема проявляется через гиф-маску в две фазы */
   :root[data-theme="dark"]::view-transition-new(root),
   :root[data-theme="light"]::view-transition-new(root){
     -webkit-mask: url(/images/waifu-dance.gif) var(--reveal-pos) / var(--start-size) no-repeat;
             mask: url(/images/waifu-dance.gif) var(--reveal-pos) / var(--start-size) no-repeat;
-    /* 1) быстрый «поп», 2) через hold — быстрый «экспанд» */
     animation:
       vt-pop var(--pop-dur) var(--reveal-ease) both,
       vt-expand var(--expand-dur) var(--reveal-ease) var(--hold-dur) both;
   }
-  
   @keyframes vt-pop{
     to{
       -webkit-mask-size: var(--pop-size);
@@ -80,50 +97,31 @@
     }
   }
   
-  /* respect reduced motion */
+  /* Respect reduced motion */
   @media (prefers-reduced-motion: reduce){
     ::view-transition-group(root),
     ::view-transition-new(root),
     ::view-transition-old(root){ animation:none !important; }
   }
   
-  /* iOS overlay keyframes: animate ONLY the 2nd mask layer (GIF) */
-@keyframes ios-pop {
-    to {
-      -webkit-mask-size: auto, var(--pop-size);
-              mask-size: auto, var(--pop-size);
-    }
+  /* ===== iOS FALLBACK (no View Transitions): waifu over content + final disk ===== */
+  @keyframes ios-waifu-pop {
+    from { transform: translate(-50%,-50%) scale(.6); }
+    to   { transform: translate(-50%,-50%) scale(1); }
   }
-  @keyframes ios-expand {
-    from {
-      -webkit-mask-size: auto, var(--pop-size);
-              mask-size: auto, var(--pop-size);
-    }
-    to {
-      -webkit-mask-size: auto, var(--final-size);
-              mask-size: auto, var(--final-size);
-    }
+  @keyframes ios-disk-expand {
+    from { width: var(--pop-size); height: var(--pop-size); }
+    to   { width: var(--final-size); height: var(--final-size); }
   }
   
-  /* (по желанию) чуть меньшие размеры на узких экранах */
-  @media (max-width: 420px){
+  /* mobile tuning */
+  @media (max-width:420px){
     :root{
+      --ios-waifu-size: 164px;
       --pop-size: 24vmax;
       --final-size: 120vmax;
-      /* можно сместить точку появления:
-         --reveal-pos: 50% 58%; */
+      /* optionally shift origin a bit:
+         --reveal-pos: 50% 56%; */
     }
   }
   
-  /* iOS fallback animations: waifu pop + final disk expand */
-:root{ --ios-waifu-size: 200px; }
-@media (max-width:420px){ :root{ --ios-waifu-size: 164px; } }
-
-@keyframes ios-waifu-pop {
-  from { transform: translate(-50%,-50%) scale(.6); }
-  to   { transform: translate(-50%,-50%) scale(1); }
-}
-@keyframes ios-disk-expand {
-  from { width: var(--pop-size); height: var(--pop-size); }
-  to   { width: var(--final-size); height: var(--final-size); }
-}
