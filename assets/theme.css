@@ -87,3 +87,31 @@
     ::view-transition-old(root){ animation:none !important; }
   }
   
+  /* iOS overlay keyframes: animate ONLY the 2nd mask layer (GIF) */
+@keyframes ios-pop {
+    to {
+      -webkit-mask-size: auto, var(--pop-size);
+              mask-size: auto, var(--pop-size);
+    }
+  }
+  @keyframes ios-expand {
+    from {
+      -webkit-mask-size: auto, var(--pop-size);
+              mask-size: auto, var(--pop-size);
+    }
+    to {
+      -webkit-mask-size: auto, var(--final-size);
+              mask-size: auto, var(--final-size);
+    }
+  }
+  
+  /* (по желанию) чуть меньшие размеры на узких экранах */
+  @media (max-width: 420px){
+    :root{
+      --pop-size: 24vmax;
+      --final-size: 120vmax;
+      /* можно сместить точку появления:
+         --reveal-pos: 50% 58%; */
+    }
+  }
+  
