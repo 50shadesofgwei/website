@@ -9,11 +9,9 @@
     --pop-size: 28vmax;         /* first "pop" size */
     --final-size: 150vmax;      /* final full-screen size */
     --pop-dur: 160ms;
-    --hold-dur: 3000ms;         /* dancing time */
+    --hold-dur: 0ms;            /* no pause between pop and expand */
     --expand-dur: 240ms;
   
-    /* iOS fallback sizing */
-    --ios-waifu-size: 200px;
   
     /* optional tokens used by prose.css (tables, rules) */
     --rule:#161616;
@@ -63,37 +61,58 @@
   .theme-btn:hover{ background:#0f0f0f }
   :root[data-theme="light"] .theme-btn:hover{ background:#f5f5f5 }
   
+  /* Language toggle button */
+  .lang-btn{
+    display:inline-flex; align-items:center; justify-content:center;
+    min-width:36px; height:36px; padding:0 10px; border:1px solid #222; border-radius:10px;
+    background:transparent; color:var(--muted); cursor:pointer;
+    font-size:14px; font-weight:500;
+  }
+  .lang-btn:hover{ background:#0f0f0f; color:var(--text); }
+  :root[data-theme="light"] .lang-btn{ border-color:#e5e5e5; }
+  :root[data-theme="light"] .lang-btn:hover{ background:#f5f5f5; }
+  
   /* smooth local recolor (e.g., tables) during toggle */
   .theme-animating, .theme-animating *{
     transition: background-color .25s ease, border-color .25s ease, color .25s ease !important;
   }
   
-  /* ===== DESKTOP: View Transitions with GIF mask (2-stage) ===== */
+  /* ===== DESKTOP: View Transitions with circular mask (2-stage) ===== */
   ::view-transition-group(root){ animation-timing-function: var(--reveal-ease); }
   ::view-transition-old(root){ animation:none; z-index:-1; }
   
   :root[data-theme="dark"]::view-transition-new(root),
   :root[data-theme="light"]::view-transition-new(root){
-    -webkit-mask: url(/images/waifu-dance.gif) var(--reveal-pos) / var(--start-size) no-repeat;
-            mask: url(/images/waifu-dance.gif) var(--reveal-pos) / var(--start-size) no-repeat;
+    -webkit-mask: radial-gradient(circle, black var(--start-size), transparent var(--start-size));
+            mask: radial-gradient(circle, black var(--start-size), transparent var(--start-size));
+    -webkit-mask-composite: source-in;
+            mask-composite: intersect;
+    -webkit-mask-position: var(--reveal-pos);
+            mask-position: var(--reveal-pos);
     animation:
       vt-pop var(--pop-dur) var(--reveal-ease) both,
       vt-expand var(--expand-dur) var(--reveal-ease) var(--hold-dur) both;
   }
   @keyframes vt-pop{
     to{
-      -webkit-mask-size: var(--pop-size);
-              mask-size: var(--pop-size);
+      -webkit-mask: radial-gradient(circle, black var(--pop-size), transparent var(--pop-size));
+              mask: radial-gradient(circle, black var(--pop-size), transparent var(--pop-size));
+      -webkit-mask-position: var(--reveal-pos);
+              mask-position: var(--reveal-pos);
     }
   }
   @keyframes vt-expand{
     from{
-      -webkit-mask-size: var(--pop-size);
-              mask-size: var(--pop-size);
+      -webkit-mask: radial-gradient(circle, black var(--pop-size), transparent var(--pop-size));
+              mask: radial-gradient(circle, black var(--pop-size), transparent var(--pop-size));
+      -webkit-mask-position: var(--reveal-pos);
+              mask-position: var(--reveal-pos);
     }
     to{
-      -webkit-mask-size: var(--final-size);
-              mask-size: var(--final-size);
+      -webkit-mask: radial-gradient(circle, black var(--final-size), transparent var(--final-size));
+              mask: radial-gradient(circle, black var(--final-size), transparent var(--final-size));
+      -webkit-mask-position: var(--reveal-pos);
+              mask-position: var(--reveal-pos);
     }
   }
   
@@ -104,10 +123,10 @@
     ::view-transition-old(root){ animation:none !important; }
   }
   
-  /* ===== iOS FALLBACK (no View Transitions): waifu over content + final disk ===== */
-  @keyframes ios-waifu-pop {
-    from { transform: translate(-50%,-50%) scale(.6); }
-    to   { transform: translate(-50%,-50%) scale(1); }
+  /* ===== iOS FALLBACK (no View Transitions): circular reveal ===== */
+  @keyframes ios-disk-pop {
+    from { width: var(--start-size); height: var(--start-size); }
+    to   { width: var(--pop-size); height: var(--pop-size); }
   }
   @keyframes ios-disk-expand {
     from { width: var(--pop-size); height: var(--pop-size); }
@@ -117,7 +136,6 @@
   /* mobile tuning */
   @media (max-width:420px){
     :root{
-      --ios-waifu-size: 164px;
       --pop-size: 24vmax;
       --final-size: 120vmax;
       /* optionally shift origin a bit:
