@@ -6,6 +6,7 @@ var translations = {
       stuff: "Work & Projects",
       contact: "Contact"
     },
+    name: "Jonathan Feasby",
     index: {
       intro1: "Hello, I'm Jonathan. I am 23 years old and I live in Manchester, UK. I speak English, Spanish, and Russian, and as of December 2025 am in the top 0.3% of chess players worldwide.",
       intro3: "I have made this website to give anyone interested a way to quickly get up to speed on who I am and what I do.",
@@ -37,6 +38,7 @@ var translations = {
       stuff: "Trabajo y Proyectos",
       contact: "Contacto"
     },
+    name: "Jonathan Feasby",
     index: {
       intro1: "Hola, soy Jonathan. Tengo 23 años y vivo en Manchester, Reino Unido. Hablo inglés, español y ruso, y a partir de diciembre de 2025 estoy en el 0.3% superior de jugadores de ajedrez en todo el mundo.",
       intro3: "He creado este sitio web para dar a cualquier persona interesada una forma de ponerse al día rápidamente sobre quién soy y qué hago.",
@@ -68,6 +70,7 @@ var translations = {
       stuff: "Работа и Проекты",
       contact: "Контакты"
     },
+    name: "Джонатан Фисби",
     index: {
       intro1: "Привет, я Джонатан. Мне 23 года, и я живу в Манчестере, Великобритания. Я говорю на английском, испанском и русском языках, и по состоянию на декабрь 2025 года я вхожу в топ 0.3% шахматистов мира.",
       intro3: "Я создал этот сайт, чтобы дать всем заинтересованным возможность быстро узнать, кто я и чем занимаюсь.",

@@ -58,6 +58,12 @@
     var t = translations[lang];
     var page = getCurrentPage();
     
+    // Update name
+    var nameElem = document.querySelector('h1[data-translate="name"]');
+    if (nameElem && t.name) {
+      nameElem.textContent = t.name;
+    }
+    
     // Update navigation
     var navLinks = document.querySelectorAll('nav a');
     navLinks.forEach(function(link) {
