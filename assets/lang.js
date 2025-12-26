@@ -45,7 +45,15 @@
   }
   
   function applyLanguage(lang) {
-    if (!translations[lang]) return;
+    if (typeof translations === 'undefined' || !translations[lang]) {
+      // Translations not loaded yet, try again after a short delay
+      setTimeout(function() {
+        if (typeof translations !== 'undefined' && translations[lang]) {
+          applyLanguage(lang);
+        }
+      }, 50);
+      return;
+    }
     
     var t = translations[lang];
     var page = getCurrentPage();
@@ -107,9 +115,10 @@
   
   function getCurrentPage() {
     var path = window.location.pathname;
-    if (path.includes('index.html') || path === '/' || path.endsWith('/')) return 'index';
-    if (path.includes('stuff.html')) return 'stuff';
-    if (path.includes('contact.html')) return 'contact';
+    var href = window.location.href;
+    if (path.includes('index.html') || path === '/' || path.endsWith('/') || href.includes('index.html')) return 'index';
+    if (path.includes('stuff.html') || href.includes('stuff.html')) return 'stuff';
+    if (path.includes('contact.html') || href.includes('contact.html')) return 'contact';
     return 'index';
   }
   
