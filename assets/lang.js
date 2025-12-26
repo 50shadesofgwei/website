@@ -78,6 +78,8 @@
             elem.textContent = t.index.understood;
           } else if (key === 'mission-section') {
             elem.innerHTML = t.index['mission-section'];
+          } else if (key === 'intro1') {
+            elem.innerHTML = t.index.intro1;
           } else {
             elem.textContent = t.index[key];
           }
