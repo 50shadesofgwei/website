@@ -50,6 +50,8 @@
   h2{ font-size:18px; margin:0 0 10px; color:var(--muted); font-weight:700; letter-spacing:.2px }
   ul{ margin:0; padding-left:18px }
   li{ margin:8px 0 }
+  blockquote{ margin:20px 0; padding-left:20px; border-left:2px solid var(--muted); color:var(--muted); font-style:italic }
+  blockquote p{ margin:8px 0 }
   footer{ color:var(--muted); margin-top:36px }
   
   /* Theme toggle button */

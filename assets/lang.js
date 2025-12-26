@@ -76,6 +76,8 @@
             elem.innerHTML = '<span style="color: red;">' + t.index.tolerance + '</span>';
           } else if (key === 'understood') {
             elem.textContent = t.index.understood;
+          } else if (key === 'mission-section') {
+            elem.innerHTML = t.index['mission-section'];
           } else {
             elem.textContent = t.index[key];
           }
