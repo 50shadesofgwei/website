@@ -98,9 +98,12 @@
         }
       });
     } else if (page === 'stuff' && t.stuff) {
+      // Select all elements with data-translate, but exclude the name element (handled separately)
       var elems = document.querySelectorAll('[data-translate]');
       elems.forEach(function(elem) {
         var key = elem.getAttribute('data-translate');
+        // Skip the name element - it's handled separately above
+        if (key === 'name') return;
         if (t.stuff[key]) {
           elem.innerHTML = t.stuff[key];
         }
@@ -122,9 +125,18 @@
   function getCurrentPage() {
     var path = window.location.pathname;
     var href = window.location.href;
-    if (path.includes('index.html') || path === '/' || path.endsWith('/') || href.includes('index.html')) return 'index';
+    var filename = path.split('/').pop() || '';
+    
+    // Check filename first (most reliable)
+    if (filename === 'stuff.html' || filename === 'stuff') return 'stuff';
+    if (filename === 'contact.html' || filename === 'contact') return 'contact';
+    if (filename === 'index.html' || filename === 'index' || filename === '' || path === '/' || path.endsWith('/')) return 'index';
+    
+    // Fallback to path/href checking
     if (path.includes('stuff.html') || href.includes('stuff.html')) return 'stuff';
     if (path.includes('contact.html') || href.includes('contact.html')) return 'contact';
+    if (path.includes('index.html') || href.includes('index.html') || path === '/' || path.endsWith('/')) return 'index';
+    
     return 'index';
   }
   
