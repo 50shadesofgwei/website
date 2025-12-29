@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="color-scheme" content="dark light" />
+    <link rel="icon" href="/images/Kasparov.jpeg" type="image/jpeg" />
+    <title>Jonathan Feasby - You Should Speak Clearly</title>
+    <script>
+      (function(){
+        try{
+          var saved = localStorage.getItem("theme");
+          var sys = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+          var theme = saved || sys || "dark";
+          document.documentElement.dataset.theme = theme;
+          document.documentElement.style.colorScheme = theme;
+        }catch(e){}
+      })();
+    </script>
+    <link rel="stylesheet" href="/assets/theme.css" />
+    <script src="/assets/translations.js" charset="utf-8"></script>
+    <script src="/assets/lang.js" charset="utf-8"></script>
+  </head>
+  <body>
+    <div class="wrap">
+      <header>
+        <h1 data-translate="name">Jonathan Feasby</h1>
+        <nav class="nav" aria-label="Primary">
+          <a href="/index.html">Home</a><span class="sep">&middot;</span>
+          <a href="/stuff.html">Work & Projects</a><span class="sep">&middot;</span>
+          <a href="/contact.html">Contact</a>
+        </nav>
+      </header>
+      <main>
+        <section>
+          <article>
+            <!-- Article content will be added here -->
+            <div data-translate="article-content"></div>
+          </article>
+        </section>
+      </main>
+    </div>
+    <script src="/assets/theme.js"></script>
+  </body>
+</html>
+

@@ -30,6 +30,9 @@ var translations = {
       twitter: "X/Twitter:",
       github: "GitHub:",
       email: "Email:"
+    },
+    article: {
+      "article-content": ""
     }
   },
   es: {
@@ -62,6 +65,9 @@ var translations = {
       twitter: "X/Twitter:",
       github: "GitHub:",
       email: "Correo:"
+    },
+    article: {
+      "article-content": ""
     }
   },
   ru: {
@@ -94,6 +100,9 @@ var translations = {
       twitter: "X/Twitter:",
       github: "GitHub:",
       email: "Email:"
+    },
+    article: {
+      "article-content": ""
     }
   }
 };

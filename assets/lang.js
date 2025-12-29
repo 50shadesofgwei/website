@@ -116,6 +116,16 @@
           label.innerHTML = '<b>' + t.contact[key] + '</b>';
         }
       });
+    } else if (page === 'article' && t.article) {
+      var elems = document.querySelectorAll('[data-translate]');
+      elems.forEach(function(elem) {
+        var key = elem.getAttribute('data-translate');
+        // Skip the name element - it's handled separately above
+        if (key === 'name') return;
+        if (t.article[key]) {
+          elem.innerHTML = t.article[key];
+        }
+      });
     }
     
     // Update HTML lang attribute
@@ -130,11 +140,13 @@
     // Check filename first (most reliable)
     if (filename === 'stuff.html' || filename === 'stuff') return 'stuff';
     if (filename === 'contact.html' || filename === 'contact') return 'contact';
+    if (path.includes('articles/') || href.includes('articles/')) return 'article';
     if (filename === 'index.html' || filename === 'index' || filename === '' || path === '/' || path.endsWith('/')) return 'index';
     
     // Fallback to path/href checking
     if (path.includes('stuff.html') || href.includes('stuff.html')) return 'stuff';
     if (path.includes('contact.html') || href.includes('contact.html')) return 'contact';
+    if (path.includes('articles/') || href.includes('articles/')) return 'article';
     if (path.includes('index.html') || href.includes('index.html') || path === '/' || path.endsWith('/')) return 'index';
     
     return 'index';
