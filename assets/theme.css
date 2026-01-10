@@ -13,7 +13,7 @@
     --expand-dur: 240ms;
   
   
-    /* optional tokens used by prose.css (tables, rules) */
+    /* optional tokens (tables, rules) */
     --rule:#161616;
     --border:#222;
     --surface:#0a0a0a;

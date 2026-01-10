@@ -69,7 +69,13 @@
     navLinks.forEach(function(link) {
       var href = link.getAttribute('href') || '';
       var isCurrent = link.hasAttribute('aria-current');
-      if (href.includes('index.html') || href === '/' || href === '') {
+      var translateAttr = link.getAttribute('data-translate');
+      
+      if (translateAttr === 'nav-articles' && t.nav['nav-articles']) {
+        link.innerHTML = isCurrent ? '<b>' + t.nav['nav-articles'] + '</b>' : t.nav['nav-articles'];
+      } else if (href.includes('articles/') && t.nav['nav-articles']) {
+        link.innerHTML = isCurrent ? '<b>' + t.nav['nav-articles'] + '</b>' : t.nav['nav-articles'];
+      } else if (href.includes('index.html') || href === '/' || href === '') {
         link.innerHTML = isCurrent ? '<b>' + t.nav.home + '</b>' : t.nav.home;
       } else if (href.includes('stuff.html')) {
         link.innerHTML = isCurrent ? '<b>' + t.nav.stuff + '</b>' : t.nav.stuff;
@@ -116,18 +122,14 @@
           label.innerHTML = '<b>' + t.contact[key] + '</b>';
         }
       });
-    } else if (page === 'article' && t.article) {
+    } else if (page === 'articles-index' && t.articles) {
       var elems = document.querySelectorAll('[data-translate]');
       elems.forEach(function(elem) {
         var key = elem.getAttribute('data-translate');
         // Skip the name element - it's handled separately above
         if (key === 'name') return;
-        if (t.article[key]) {
-          if (key === 'article-title') {
-            elem.textContent = t.article[key];
-          } else {
-            elem.innerHTML = t.article[key];
-          }
+        if (t.articles[key]) {
+          elem.textContent = t.articles[key];
         }
       });
     }
@@ -138,20 +140,12 @@
   
   function getCurrentPage() {
     var path = window.location.pathname;
-    var href = window.location.href;
     var filename = path.split('/').pop() || '';
     
-    // Check filename first (most reliable)
     if (filename === 'stuff.html' || filename === 'stuff') return 'stuff';
     if (filename === 'contact.html' || filename === 'contact') return 'contact';
-    if (path.includes('articles/') || href.includes('articles/')) return 'article';
+    if (path.includes('articles/index.html') || (path.includes('articles/') && (filename === 'index.html' || filename === 'index' || filename === ''))) return 'articles-index';
     if (filename === 'index.html' || filename === 'index' || filename === '' || path === '/' || path.endsWith('/')) return 'index';
-    
-    // Fallback to path/href checking
-    if (path.includes('stuff.html') || href.includes('stuff.html')) return 'stuff';
-    if (path.includes('contact.html') || href.includes('contact.html')) return 'contact';
-    if (path.includes('articles/') || href.includes('articles/')) return 'article';
-    if (path.includes('index.html') || href.includes('index.html') || path === '/' || path.endsWith('/')) return 'index';
     
     return 'index';
   }
