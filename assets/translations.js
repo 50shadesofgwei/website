@@ -18,7 +18,7 @@ var translations = {
     },
     stuff: {
       title: "Work & Projects",
-      work0: "My first 'project' was teaching myself to play the guitar at the age of 12. I have played ever since, and like to think I'm half decent at it.",
+      work0: "My first project was teaching myself to play the guitar at the age of 12. I have played ever since, and like to think I'm half decent at it.",
       work0b: "A lifelong, ongoing, project that I hold quite dear is reading. I have always been a voracious reader - I read the Hobbit and LOTR at 11. I later became interested in the works of Jung, Nietzche and Dostoyevsky.",
       work1: "In 2021 I dropped out of university to start working in MEV research and development at what is now <a href=\"https://www.smg.org/\" target=\"_blank\" rel=\"noopener\" style=\"text-decoration: underline\">Special Mechanisms Group</a>.",
       work2: "After this, I started programming searchers and trading bots on my own; work for which I was awarded around $70,000 throughout 2023 and early 2024 in grants from organiasations such as <a href=\"https://gmx.io/#/\" target=\"_blank\" rel=\"noopener\" style=\"text-decoration: underline\">GMX</a> and <a href=\"https://www.synthetix.io/\" target=\"_blank\" rel=\"noopener\" style=\"text-decoration: underline\">Synthetix</a>.",
@@ -54,7 +54,7 @@ var translations = {
     },
     stuff: {
       title: "Trabajo y Proyectos",
-      work0: "Mi primer 'proyecto' fue enseñarme a tocar la guitarra a los 12 años. He tocado desde entonces, y me gusta pensar que soy bastante bueno en ello.",
+      work0: "Mi primer proyecto fue enseñarme a tocar la guitarra a los 12 años. He tocado desde entonces, y quiero creer que soy bastante bueno en ello.",
       work0b: "Un proyecto de toda la vida y en curso que aprecio mucho es la lectura. Siempre he sido un lector voraz - leí El Hobbit y El Señor de los Anillos a los 11 años. Más tarde me interesé por las obras de Jung, Nietzsche y Dostoievski.",
       work1: "En 2021 dejé la universidad para comenzar a trabajar en investigación y desarrollo de MEV en lo que ahora es <a href=\"https://www.smg.org/\" target=\"_blank\" rel=\"noopener\" style=\"text-decoration: underline\">Special Mechanisms Group</a>.",
       work2: "Después de esto, comencé a programar bots y algoritmos de trading por mi cuenta; trabajo por el cual recibí alrededor de $70,000 durante 2023 y principios de 2024 en subvenciones de organizaciones como <a href=\"https://gmx.io/#/\" target=\"_blank\" rel=\"noopener\" style=\"text-decoration: underline\">GMX</a> y <a href=\"https://www.synthetix.io/\" target=\"_blank\" rel=\"noopener\" style=\"text-decoration: underline\">Synthetix</a>.",
@@ -90,7 +90,7 @@ var translations = {
     },
     stuff: {
       title: "Работа и Проекты",
-      work0: "Моим первым 'проектом' было научиться играть на гитаре в возрасте 12 лет. Я играю с тех пор и думаю, что я довольно неплох в этом.",
+      work0: "Моим первым проектом было научиться играть на гитаре в возрасте 12 лет. Я играю с тех пор и думаю, что я довольно неплох в этом.",
       work0b: "Проект всей моей жизни, который я очень ценю, - это чтение. Я всегда был ненасытным читателем - я прочитал Хоббита и Властелина колец в 11 лет. Позже я заинтересовался произведениями Юнга, Ницше и Достоевского.",
       work1: "В 2021 году я бросил университет, чтобы начать работать в области исследований и разработки MEV в том, что сейчас является <a href=\"https://www.smg.org/\" target=\"_blank\" rel=\"noopener\" style=\"text-decoration: underline\">Special Mechanisms Group</a>.",
       work2: "После этого я начал самостоятельно программировать поисковики и торговых ботов; работа, за которую я получил около $70,000 в течение 2023 года и начала 2024 года в виде грантов от организаций, таких как <a href=\"https://gmx.io/#/\" target=\"_blank\" rel=\"noopener\" style=\"text-decoration: underline\">GMX</a> и <a href=\"https://www.synthetix.io/\" target=\"_blank\" rel=\"noopener\" style=\"text-decoration: underline\">Synthetix</a>.",
