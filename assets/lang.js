@@ -123,7 +123,11 @@
         // Skip the name element - it's handled separately above
         if (key === 'name') return;
         if (t.article[key]) {
-          elem.innerHTML = t.article[key];
+          if (key === 'article-title') {
+            elem.textContent = t.article[key];
+          } else {
+            elem.innerHTML = t.article[key];
+          }
         }
       });
     }
