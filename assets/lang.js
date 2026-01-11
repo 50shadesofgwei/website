@@ -91,11 +91,7 @@
         var key = elem.getAttribute('data-translate');
         if (t.index[key]) {
           if (key === 'highlight') {
-            elem.innerHTML = '<b>' + t.index.highlight + '</b>';
-          } else if (key === 'tolerance') {
-            elem.innerHTML = '<span style="color: red;">' + t.index.tolerance + '</span>';
-          } else if (key === 'understood') {
-            elem.textContent = t.index.understood;
+            elem.innerHTML = t.index.highlight;
           } else if (key === 'mission-section') {
             elem.innerHTML = t.index['mission-section'];
           } else {
