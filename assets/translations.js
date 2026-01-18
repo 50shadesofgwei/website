@@ -33,7 +33,8 @@ var translations = {
       email: "Email:"
     },
     articles: {
-      "article-list-item-1": "How to Lose Friends and Confuse People"
+      "article-list-item-1": "How to Lose Friends and Confuse People",
+      "article-list-item-2": "If You're Going to be Weird You'd Better be Good at it"
     }
   },
   es: {
@@ -69,7 +70,8 @@ var translations = {
       email: "Correo:"
     },
     articles: {
-      "article-list-item-1": "Cómo Perder Amigos y Confundir a la Gente"
+      "article-list-item-1": "Cómo Perder Amigos y Confundir a la Gente",
+      "article-list-item-2": "Si Vas a Ser Raro, Mejor Que Seas Bueno en Eso"
     }
   },
   ru: {
@@ -105,7 +107,8 @@ var translations = {
       email: "Email:"
     },
     articles: {
-      "article-list-item-1": "Как Потерять Друзей и Запутать Людей"
+      "article-list-item-1": "Как Потерять Друзей и Запутать Людей",
+      "article-list-item-2": "Если Ты Собираешься Быть Странным, Лучше Будь В Этом Хорош"
     }
   }
 };
