@@ -34,7 +34,8 @@ var translations = {
     },
     articles: {
       "article-list-item-1": "How to Lose Friends and Confuse People",
-      "article-list-item-2": "If You're Going to be Weird You'd Better be Good at it"
+      "article-list-item-2": "If You're Going to be Weird You'd Better be Good at it",
+      "article-list-item-3": "Note to Self: Be Less of a Wanker"
     }
   },
   es: {
@@ -71,7 +72,8 @@ var translations = {
     },
     articles: {
       "article-list-item-1": "Cómo Perder Amigos y Confundir a la Gente",
-      "article-list-item-2": "Si Vas a Ser Raro, Mejor Que Seas Bueno en Eso"
+      "article-list-item-2": "Si Vas a Ser Raro, Mejor Que Seas Bueno en Eso",
+      "article-list-item-3": "Nota para Mí: Sé Menos Idiota"
     }
   },
   ru: {
@@ -108,7 +110,8 @@ var translations = {
     },
     articles: {
       "article-list-item-1": "Как Потерять Друзей и Запутать Людей",
-      "article-list-item-2": "Если Ты Собираешься Быть Странным, Лучше Будь В Этом Хорош"
+      "article-list-item-2": "Если Ты Собираешься Быть Странным, Лучше Будь В Этом Хорош",
+      "article-list-item-3": "Заметка Себе: Будь Меньше Мудаком"
     }
   }
 };
