@@ -279,6 +279,48 @@ blockquote p{
   margin: var(--spacing-sm) 0;
 }
 
+blockquote.opening-quote {
+  margin: var(--spacing-2xl) auto var(--spacing-xl) auto;
+  padding: var(--spacing-xl) var(--spacing-lg);
+  max-width: 600px;
+  text-align: center;
+  border-left: none;
+  border-top: 2px solid var(--accent);
+  border-bottom: 2px solid var(--accent);
+  background: transparent;
+  font-style: normal;
+  color: var(--text);
+  box-shadow: none;
+  position: relative;
+}
+
+blockquote.opening-quote::before {
+  display: none;
+}
+
+blockquote.opening-quote p {
+  font-size: 20px;
+  line-height: 1.8;
+  margin: 0 0 var(--spacing-md) 0;
+  color: var(--text);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+}
+
+blockquote.opening-quote cite {
+  display: block;
+  margin-top: var(--spacing-md);
+  font-size: 15px;
+  font-style: normal;
+  color: var(--muted);
+  font-weight: 400;
+}
+
+blockquote.opening-quote cite em {
+  font-style: italic;
+  color: var(--muted-light);
+}
+
 footer{ 
   color: var(--muted);
   margin-top: var(--spacing-2xl);
