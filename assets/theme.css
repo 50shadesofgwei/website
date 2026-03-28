@@ -546,10 +546,7 @@ footer{
   background: transparent;
   border: none;
   border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
 }
-
-
 
 .mission-box h2 {
   margin-top: 0;
