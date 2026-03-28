@@ -530,7 +530,32 @@ footer{
 
 /* Mission section styling */
 .intro-box {
-  margin: var(--spacing-lg) 0;
+  margin: var(--spacing-xl) 0;
+  padding: var(--spacing-xl);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.intro-box::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, transparent 100%);
+  border-radius: var(--radius-lg);
+  pointer-events: none;
+}
+
+.intro-box:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+  border-color: var(--border-light);
 }
 
 .intro-box p {
@@ -538,16 +563,63 @@ footer{
 }
 
 .mission-box {
-  margin: var(--spacing-lg) 0;
+  margin: var(--spacing-xl) 0;
+  padding: var(--spacing-xl);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.mission-box::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  opacity: 0.3;
+}
+
+.mission-box:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+  border-color: var(--border-light);
 }
 
 .mission-box h2 {
   margin-top: 0;
-  margin-bottom: var(--spacing-sm);
-  font-size: 20px;
+  margin-bottom: var(--spacing-md);
+  font-size: 22px;
 }
 
 .mission-box p {
+  margin: var(--spacing-sm) 0;
+  padding-left: var(--spacing-md);
+  position: relative;
+}
+
+.mission-box p.no-prefix {
+  padding-left: 0;
+}
+
+.mission-box p:not(.no-prefix)::before {
+  content: ">";
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.mission-box ul {
+  margin: var(--spacing-md) 0;
+  padding-left: var(--spacing-xl);
+}
+
+.mission-box ul li {
   margin: var(--spacing-sm) 0;
 }
 
