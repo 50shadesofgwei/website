@@ -530,8 +530,8 @@ footer{
 
 /* Mission section styling */
 .intro-box {
-  margin: var(--spacing-xl) 0;
-  padding: var(--spacing-md) 0;
+  margin: var(--spacing-lg) 0;
+  padding: var(--spacing-lg) 0;
   background: transparent;
   border: none;
   border-top: 1px solid var(--border);
@@ -542,8 +542,8 @@ footer{
 }
 
 .mission-box {
-  margin: var(--spacing-xl) 0;
-  padding: var(--spacing-md) 0;
+  margin: var(--spacing-lg) 0;
+  padding: var(--spacing-lg) 0;
   background: transparent;
   border: none;
   border-top: 1px solid var(--border);
