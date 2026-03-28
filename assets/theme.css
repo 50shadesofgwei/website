@@ -286,7 +286,6 @@ blockquote.opening-quote {
   text-align: center;
   border-left: none;
   border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
   background: transparent;
   font-style: normal;
   color: var(--muted-light);
