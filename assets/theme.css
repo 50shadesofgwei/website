@@ -280,7 +280,7 @@ blockquote p{
 }
 
 blockquote.opening-quote {
-  margin: var(--spacing-md) auto var(--spacing-sm) auto;
+  margin: var(--spacing-md) auto var(--spacing-md) auto;
   padding: var(--spacing-sm) 0;
   max-width: 600px;
   text-align: center;
