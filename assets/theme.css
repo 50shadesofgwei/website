@@ -531,22 +531,11 @@ footer{
 /* Mission section styling */
 .intro-box {
   margin: var(--spacing-xl) 0;
-  padding: var(--spacing-xl);
-  background: var(--surface);
-  border: 1px solid var(--border);
-  box-shadow: var(--shadow-sm);
-  position: relative;
-}
-
-.intro-box::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, transparent 100%);
-  pointer-events: none;
+  padding: var(--spacing-md) 0;
+  background: transparent;
+  border: none;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
 }
 
 .intro-box p {
@@ -555,22 +544,11 @@ footer{
 
 .mission-box {
   margin: var(--spacing-xl) 0;
-  padding: var(--spacing-xl);
-  background: var(--surface);
-  border: 1px solid var(--border);
-  box-shadow: var(--shadow-sm);
-  position: relative;
-}
-
-.mission-box::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--accent), transparent);
-  opacity: 0.3;
+  padding: var(--spacing-md) 0;
+  background: transparent;
+  border: none;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
 }
 
 
