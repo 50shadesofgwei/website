@@ -530,7 +530,7 @@ footer{
 
 /* Mission section styling */
 .intro-box {
-  margin: var(--spacing-lg) 0;
+  margin: 0;
   padding: var(--spacing-lg) 0;
   background: transparent;
   border: none;
@@ -542,7 +542,7 @@ footer{
 }
 
 .mission-box {
-  margin: var(--spacing-lg) 0;
+  margin: 0;
   padding: var(--spacing-lg) 0;
   background: transparent;
   border: none;
