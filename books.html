@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="color-scheme" content="dark light" />
+    <link rel="icon" href="/images/Kasparov.jpeg" type="image/jpeg" />
+    <title>Jonathan Feasby - Bookshelf</title>
+    <script>
+      (function(){
+        try{
+          var saved = localStorage.getItem("theme");
+          var sys = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+          var theme = saved || sys || "dark";
+          document.documentElement.dataset.theme = theme;
+          document.documentElement.style.colorScheme = theme;
+        }catch(e){}
+      })();
+    </script>
+    <link rel="stylesheet" href="/assets/theme.css" />
+  </head>
+  <body>
+    <div class="wrap">
+      <header>
+        <h1>Jonathan Feasby</h1>
+        <nav class="nav" aria-label="Primary">
+          <a href="/index.html">Home</a><span class="sep">&middot;</span>
+          <a href="/stuff.html">Work & Projects</a><span class="sep">&middot;</span>
+          <a href="/articles/index.html">Writings</a><span class="sep">&middot;</span>
+          <a href="/books.html" aria-current="page"><b>Bookshelf</b></a><span class="sep">&middot;</span>
+          <a href="/contact.html">Contact</a>
+          <span class="sep">&middot;</span>
+          <button id="themeToggle" class="theme-btn" aria-label="Toggle theme" title="Toggle theme">&#9790;</button>
+        </nav>
+      </header>
+      <main>
+        <section>
+          <blockquote class="opening-quote">
+            <p>'After a lengthy consideration I admitted defeat as an engineer, and thought spitefully to myself: "Well, just let it drown!", and straight away the position did not appear to be so complicated. Now, I somehow realized that it was not possible to calculate all the variations, and that the sacrifice was, by its very nature, purely intuitive. And since it promised an interesting game, I could not refrain from making it. The following day, it was with great pleasure that I read in the paper how Mikhail Tal, after carefully thinking over the position for 40 minutes, made an accurately calculated piece sacrifice.'</p>
+            <cite>- Mikhail Tal, <em>The Life and Games of Mikhail Tal</em></cite>
+          </blockquote>
+          <h2>Books I've Read</h2>
+          <div id="booksGrid" class="books-grid"></div>
+        </section>
+      </main>
+    </div>
+    <script>
+      const books = [
+        { title: "Steve Jobs", author: "Walter Isaacson" },
+        { title: "Kelly", author: "Kelly Johnson" },
+        { title: "Skunk Works", author: "Ben Rich" },
+        { title: "Beyond Good and Evil", author: "Friedrich Nietzsche" },
+        { title: "Thus Spoke Zarathustra", author: "Friedrich Nietzsche" },
+        { title: "The Book of Elon", author: "Eric Jorgenson" },
+        { title: "The Mom Test", author: "Rob Fitzpatrick" },
+        { title: "The Man Who Invented the Computer", author: "Jane Smiley" },
+        { title: "Deep Thinking", author: "Garry Kasparov" },
+        { title: "Zero to One", author: "Peter Thiel" },
+        { title: "The Sorrows of Young Werther", author: "Johann Wolfgang von Goethe" },
+        { title: "Crime and Punishment", author: "Fyodor Dostoevsky" },
+        { title: "Source Code", author: "Bill Gates" },
+        { title: "The Man Who Solved the Market", author: "Gregory Zuckerman" },
+        { title: "Elon Musk", author: "Walter Isaacson" },
+        { title: "Aion", author: "Carl Jung" },
+        { title: "Man and His Symbols", author: "Carl Jung" },
+        { title: "Modern Man in Search of a Soul", author: "Carl Jung" },
+        { title: "The Red Book", author: "Carl Jung" },
+        { title: "Memories, Dreams, Reflections", author: "Carl Jung" },
+        { title: "The Psychology of the Unconscious Processes", author: "Carl Jung" },
+        { title: "Machiavelli", author: "Quentin Skinner" },
+        { title: "The 48 Laws of Power", author: "Robert Greene" },
+        { title: "Extreme Ownership", author: "Jocko Willink" },
+        { title: "Endgame", author: "Frank Brady" },
+        { title: "Masters of Doom", author: "David Kushner" },
+        { title: "Things Hidden Since the Foundation of the World", author: "Rene Girard" },
+        { title: "Market Wizards", author: "Jack Schwager" },
+        { title: "Never Split the Difference", author: "Chris Voss" },
+        { title: "The Pragmatic Programmer", author: "David Thomas" },
+        { title: "Can't Hurt Me", author: "David Goggins" },
+        { title: "Dark Pools", author: "Scott Patterson" },
+        { title: "12 Rules for Life", author: "Jordan Peterson" },
+        { title: "The Prince", author: "Niccolo Machiavelli" },
+        { title: "On the Road", author: "Jack Kerouac" },
+        { title: "The Dharma Bums", author: "Jack Kerouac" },
+        { title: "The Electric Kool-Aid Acid Test", author: "Tom Wolfe" },
+        { title: "Notes from Underground", author: "Fyodor Dostoevsky" },
+        { title: "The Doors of Perception", author: "Aldous Huxley" },
+        { title: "Birth School Metallica Death", author: "" },
+        { title: "Into the Black", author: "" },
+        { title: "Slash", author: "Slash" },
+        { title: "Quantum Computing for Everyone", author: "Chris Bernhardt" },
+        { title: "Napoleon the Great", author: "Andrew Roberts" },
+        { title: "Flash Boys", author: "Michael Lewis" },
+        { title: "The Gulag Archipelago", author: "Aleksandr Solzhenitsyn" },
+        { title: "Principles", author: "Ray Dalio" },
+        { title: "The Immortality Key", author: "Brian Muraresku" },
+        { title: "Ordinary Men", author: "Christopher Browning" },
+        { title: "The Hobbit", author: "J. R. R. Tolkien" },
+        { title: "The Fellowship of the Ring", author: "J. R. R. Tolkien" },
+        { title: "The Two Towers", author: "J. R. R. Tolkien" },
+        { title: "The Return of the King", author: "J. R. R. Tolkien" },
+        { title: "Technical Analysis of the Financial Markets", author: "John J. Murphy" },
+        { title: "The Life and Games of Mikhail Tal", author: "Mikhail Tal" },
+        { title: "Learn from the Legends", author: "Mihail Marin" }
+      ];
+
+      function slugify(value) {
+        return value.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+      }
+
+      function renderBooks() {
+        const grid = document.getElementById("booksGrid");
+        for (const book of books) {
+          const card = document.createElement("article");
+          card.className = "book-card";
+          const image = document.createElement("img");
+          image.alt = "Cover of " + book.title;
+          image.loading = "lazy";
+          image.decoding = "async";
+          image.className = "book-cover";
+          image.src = "/images/books/" + slugify(book.title) + ".jpg";
+
+          const title = document.createElement("h3");
+          title.className = "book-title";
+          title.textContent = book.title;
+
+          const author = document.createElement("p");
+          author.className = "book-author";
+          author.textContent = book.author ? "by " + book.author : "author unknown";
+
+          card.appendChild(image);
+          card.appendChild(title);
+          card.appendChild(author);
+          grid.appendChild(card);
+        }
+      }
+
+      renderBooks();
+    </script>
+    <script src="/assets/theme.js"></script>
+  </body>
+</html>

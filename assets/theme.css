@@ -621,6 +621,42 @@ footer{
   margin: var(--spacing-sm) 0;
 }
 
+.books-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  gap: var(--spacing-lg);
+  margin-top: var(--spacing-lg);
+}
+
+.book-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-md);
+  box-shadow: var(--shadow-sm);
+}
+
+.book-cover {
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--surface-hover);
+}
+
+.book-title {
+  font-size: 15px;
+  line-height: 1.4;
+  margin: var(--spacing-sm) 0 var(--spacing-xs);
+}
+
+.book-author {
+  margin: 0;
+  font-size: 14px;
+  color: var(--muted);
+}
+
 /* Mobile tuning */
 @media (max-width: 420px){
   :root{
