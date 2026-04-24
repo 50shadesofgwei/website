@@ -529,12 +529,51 @@ footer{
 }
 
 /* Mission section styling */
+.hero-image {
+  margin: 0;
+  padding: var(--spacing-lg) 0;
+}
+
+.hero-line {
+  height: 1px;
+  background: var(--border);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero-line-long {
+  width: 100%;
+}
+
+.hero-line-short {
+  width: 70%;
+}
+
+.hero-line-long + .hero-line-short {
+  margin-top: var(--spacing-md);
+}
+
+.hero-image img + .hero-line-short {
+  margin-top: var(--spacing-md);
+}
+
+.hero-line-short + .hero-line-long {
+  margin-top: var(--spacing-md);
+}
+
+.hero-image img {
+  display: block;
+  width: 33%;
+  height: auto;
+  margin: var(--spacing-md) auto;
+  border-radius: 6px;
+}
+
 .intro-box {
   margin: 0;
   padding: var(--spacing-lg) 0;
   background: transparent;
   border: none;
-  border-top: 1px solid var(--border);
 }
 
 .intro-box p {
