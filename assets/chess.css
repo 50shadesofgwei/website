@@ -1,0 +1,162 @@
+/* Chess studies — per-study page styling */
+
+.chess-study .back-link {
+  margin: 0 0 var(--spacing-md);
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.chess-study .back-link a {
+  border-bottom: 1px solid transparent;
+}
+
+.chess-study .back-link a:hover {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+.chess-study .study-title {
+  font-size: clamp(26px, 4vw, 34px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 0 0 var(--spacing-lg);
+  color: var(--text);
+}
+
+.chess-study h2 {
+  font-size: 22px;
+  margin-top: var(--spacing-2xl);
+  margin-bottom: var(--spacing-sm);
+  color: var(--text);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.chess-study h3 {
+  font-size: 18px;
+  margin-top: var(--spacing-xl);
+  margin-bottom: var(--spacing-xs);
+  color: var(--text);
+  font-weight: 600;
+}
+
+.chess-study p {
+  margin: var(--spacing-md) 0;
+  line-height: 1.75;
+}
+
+.chess-study figure.image {
+  margin: var(--spacing-lg) 0;
+  text-align: center;
+  page-break-inside: avoid;
+}
+
+.chess-study figure.image a {
+  display: inline-block;
+  border-bottom: none;
+  line-height: 0;
+}
+
+.chess-study figure.image a:hover {
+  border-bottom: none;
+  opacity: 0.92;
+}
+
+.chess-study figure.image img {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-md);
+  background: var(--surface);
+}
+
+.chess-study strong {
+  color: var(--text);
+}
+
+/* Notion's display:contents wrappers — let block flow happen normally */
+.chess-study div[style*="display:contents"],
+.chess-study div[style*="display: contents"] {
+  display: contents;
+}
+
+/* Index page section grouping */
+.chess-section {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  margin: var(--spacing-md) 0;
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.chess-section[open] {
+  box-shadow: var(--shadow-md);
+}
+
+.chess-section > summary {
+  list-style: none;
+  cursor: pointer;
+  padding: var(--spacing-md) var(--spacing-lg);
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  user-select: none;
+  transition: background 0.2s ease;
+}
+
+.chess-section > summary::-webkit-details-marker {
+  display: none;
+}
+
+.chess-section > summary:hover {
+  background: var(--surface-hover);
+}
+
+.chess-section > summary::after {
+  content: "+";
+  font-size: 22px;
+  font-weight: 400;
+  color: var(--muted);
+  transition: transform 0.25s ease, color 0.2s ease;
+  margin-left: var(--spacing-md);
+  line-height: 1;
+}
+
+.chess-section[open] > summary::after {
+  content: "\2212"; /* minus */
+  color: var(--accent);
+  transform: rotate(180deg);
+}
+
+.chess-section-body {
+  padding: 0 var(--spacing-lg) var(--spacing-md);
+  border-top: 1px solid var(--border);
+}
+
+.chess-section-body h3 {
+  font-size: 13px;
+  margin: var(--spacing-lg) 0 var(--spacing-xs);
+  color: var(--muted);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.chess-section-body h3:first-child {
+  margin-top: var(--spacing-md);
+}
+
+.chess-section-body .article-list {
+  margin-top: var(--spacing-sm);
+}
+
+.chess-section-body .article-list li {
+  margin: var(--spacing-sm) 0;
+}
