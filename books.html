@@ -13,7 +13,7 @@
         <h1>Jonathan Feasby</h1>
         <nav class="nav" aria-label="Primary">
           <a href="/index.html">Home</a><span class="sep">&middot;</span>
-          <a href="/stuff.html">Work & Projects</a><span class="sep">&middot;</span>
+          <a href="/stuff.html">Work &amp; Projects</a><span class="sep">&middot;</span>
           <a href="/articles/index.html">Writings</a><span class="sep">&middot;</span>
           <a href="/books.html" aria-current="page"><b>Bookshelf</b></a><span class="sep">&middot;</span>
           <a href="/chess.html">Chess Studies</a><span class="sep">&middot;</span>
@@ -21,124 +21,92 @@
         </nav>
       </header>
       <main>
-        <section>
-          <div id="booksGrid" class="books-grid"></div>
-        </section>
+        <article class="bookshelf-article">
+
+          <p class="bookshelf-intro">The following is a collection of the 10 books which have had the most impact on my life, which changed the way I see the world, or which serve as touchstones for specific moments in time. Listed in the order I read them.</p>
+
+          <section class="book-entry">
+            <img class="book-entry-cover" src="/images/books/the-hobbit.jpg" alt="Cover of The Hobbit" loading="lazy" />
+            <div class="book-entry-meta">
+              <h2 class="book-entry-title">1. The Hobbit</h2>
+              <p class="book-entry-author">J. R. R. Tolkien</p>
+            </div>
+          </section>
+
+          <section class="book-entry">
+            <img class="book-entry-cover" src="/images/books/the-doors-of-perception.jpg" alt="Cover of The Doors of Perception" loading="lazy" />
+            <div class="book-entry-meta">
+              <h2 class="book-entry-title">2. The Doors of Perception</h2>
+              <p class="book-entry-author">Aldous Huxley</p>
+            </div>
+          </section>
+
+          <section class="book-entry">
+            <img class="book-entry-cover" src="/images/books/memories-dreams-reflections.jpg" alt="Cover of Memories, Dreams, Reflections" loading="lazy" />
+            <div class="book-entry-meta">
+              <h2 class="book-entry-title">3. Memories, Dreams, Reflections</h2>
+              <p class="book-entry-author">Carl Jung</p>
+            </div>
+          </section>
+
+          <section class="book-entry">
+            <img class="book-entry-cover" src="/images/books/the-48-laws-of-power.jpg" alt="Cover of The 48 Laws of Power" loading="lazy" />
+            <div class="book-entry-meta">
+              <h2 class="book-entry-title">4. The 48 Laws of Power</h2>
+              <p class="book-entry-author">Robert Greene</p>
+            </div>
+          </section>
+
+          <section class="book-entry">
+            <img class="book-entry-cover" src="/images/books/beyond-good-and-evil.jpg" alt="Cover of Beyond Good and Evil" loading="lazy" />
+            <div class="book-entry-meta">
+              <h2 class="book-entry-title">5. Beyond Good and Evil</h2>
+              <p class="book-entry-author">Friedrich Nietzsche</p>
+            </div>
+          </section>
+
+          <section class="book-entry">
+            <img class="book-entry-cover" src="/images/books/on-the-road.jpg" alt="Cover of On the Road" loading="lazy" />
+            <div class="book-entry-meta">
+              <h2 class="book-entry-title">6. On the Road</h2>
+              <p class="book-entry-author">Jack Kerouac</p>
+            </div>
+          </section>
+
+          <section class="book-entry">
+            <img class="book-entry-cover" src="/images/books/the-sorrows-of-young-werther.jpg" alt="Cover of The Sorrows of Young Werther" loading="lazy" />
+            <div class="book-entry-meta">
+              <h2 class="book-entry-title">7. The Sorrows of Young Werther</h2>
+              <p class="book-entry-author">Johann Wolfgang von Goethe</p>
+            </div>
+          </section>
+
+          <section class="book-entry">
+            <img class="book-entry-cover" src="/images/books/crime-and-punishment.jpg" alt="Cover of Crime and Punishment" loading="lazy" />
+            <div class="book-entry-meta">
+              <h2 class="book-entry-title">8. Crime and Punishment</h2>
+              <p class="book-entry-author">Fyodor Dostoevsky</p>
+            </div>
+          </section>
+
+          <section class="book-entry">
+            <img class="book-entry-cover" src="/images/books/elon-musk.jpg" alt="Cover of Elon Musk" loading="lazy" />
+            <div class="book-entry-meta">
+              <h2 class="book-entry-title">9. Elon Musk</h2>
+              <p class="book-entry-author">Walter Isaacson</p>
+            </div>
+          </section>
+
+          <section class="book-entry">
+            <img class="book-entry-cover" src="/images/books/skunk-works.jpg" alt="Cover of Skunk Works" loading="lazy" />
+            <div class="book-entry-meta">
+              <h2 class="book-entry-title">10. Skunk Works</h2>
+              <p class="book-entry-author">Ben Rich</p>
+            </div>
+          </section>
+
+        </article>
       </main>
     </div>
-    <script>
-      const books = [
-        { title: "Aion", author: "Carl Jung" },
-        { title: "Man and His Symbols", author: "Carl Jung" },
-        { title: "Modern Man in Search of a Soul", author: "Carl Jung" },
-        { title: "The Red Book", author: "Carl Jung" },
-        { title: "Memories, Dreams, Reflections", author: "Carl Jung" },
-        { title: "The Psychology of the Unconscious Processes", author: "Carl Jung" },
-        { title: "Beyond Good and Evil", author: "Friedrich Nietzsche" },
-        { title: "Thus Spoke Zarathustra", author: "Friedrich Nietzsche" },
-        { title: "Crime and Punishment", author: "Fyodor Dostoevsky" },
-        { title: "Notes from Underground", author: "Fyodor Dostoevsky" },
-        { title: "Steve Jobs", author: "Walter Isaacson" },
-        { title: "Kelly", author: "Kelly Johnson" },
-        { title: "Skunk Works", author: "Ben Rich" },
-        { title: "The Man Who Invented the Computer", author: "Jane Smiley" },
-        { title: "Deep Thinking", author: "Garry Kasparov" },
-        { title: "Zero to One", author: "Peter Thiel" },
-        { title: "The Sorrows of Young Werther", author: "Johann Wolfgang von Goethe" },
-        { title: "Source Code", author: "Bill Gates" },
-        { title: "The Man Who Solved the Market", author: "Gregory Zuckerman" },
-        { title: "Machiavelli", author: "Quentin Skinner" },
-        { title: "The 48 Laws of Power", author: "Robert Greene" },
-        { title: "Extreme Ownership", author: "Jocko Willink" },
-        { title: "Endgame", author: "Frank Brady" },
-        { title: "Masters of Doom", author: "David Kushner" },
-        { title: "Things Hidden Since the Foundation of the World", author: "Rene Girard" },
-        { title: "Market Wizards", author: "Jack Schwager" },
-        { title: "Never Split the Difference", author: "Chris Voss" },
-        { title: "The Pragmatic Programmer", author: "David Thomas" },
-        { title: "Can't Hurt Me", author: "David Goggins" },
-        { title: "Dark Pools", author: "Scott Patterson" },
-        { title: "12 Rules for Life", author: "Jordan Peterson" },
-        { title: "The Prince", author: "Niccolo Machiavelli" },
-        { title: "On the Road", author: "Jack Kerouac" },
-        { title: "The Dharma Bums", author: "Jack Kerouac" },
-        { title: "The Electric Kool-Aid Acid Test", author: "Tom Wolfe" },
-        { title: "The Doors of Perception", author: "Aldous Huxley" },
-        { title: "Quantum Computing for Everyone", author: "Chris Bernhardt" },
-        { title: "Napoleon: A Life", author: "Andrew Roberts" },
-        { title: "Flash Boys", author: "Michael Lewis" },
-        { title: "The Gulag Archipelago", author: "Aleksandr Solzhenitsyn" },
-        { title: "Principles", author: "Ray Dalio" },
-        { title: "The Immortality Key", author: "Brian Muraresku" },
-        { title: "Ordinary Men", author: "Christopher Browning" },
-        { title: "The Hobbit", author: "J. R. R. Tolkien" },
-        { title: "The Fellowship of the Ring", author: "J. R. R. Tolkien" },
-        { title: "The Two Towers", author: "J. R. R. Tolkien" },
-        { title: "The Return of the King", author: "J. R. R. Tolkien" },
-        { title: "Technical Analysis of the Financial Markets", author: "John J. Murphy" },
-        { title: "The Life and Games of Mikhail Tal", author: "Mikhail Tal" },
-        { title: "The Book of Elon", author: "Eric Jorgenson" },
-        { title: "Elon Musk", author: "Walter Isaacson" },
-        { title: "Learn from the Legends", author: "Mihail Marin" },
-        { title: "Ethics", author: "Spinoza" },
-        { title: "The Great Gatsby", author: "F. Scott Fitzgerald" },
-        { title: "Short Stories in Russian", author: "David Richards" },
-        { title: "The Stationmaster", author: "Alexander Pushkin" },
-        { title: "The Way of the Intelligent Rebel", author: "Olivier Roland" },
-        { title: "The Modern Benoni", author: "Richard Pallister" },
-        { title: "Animal Farm", author: "George Orwell" },
-        { title: "Testing with Humans", author: "Giff Constable" },
-        { title: "Black Sabbath", author: "Mick Wall" },
-        { title: "Dinamismo y Cálculo en Ajedrez", author: "Antonio Gude" },
-        { title: "How Life Imitates Chess", author: "Garry Kasparov" },
-        { title: "Selected Writings", author: "Meister Eckhart" },
-        { title: "The Bitcoin Standard", author: "Saifedean Ammous" },
-        { title: "Valis", author: "Philip K. Dick" },
-        { title: "Mustaine", author: "Dave Mustaine" },
-        { title: "The Mom Test", author: "Rob Fitzpatrick" },
-        { title: "Birth School Metallica Death", author: "Ian Winwood" },
-        { title: "Into the Black", author: "Ian Winwood" },
-        { title: "Slash", author: "Slash" },
-        { title: "Moneyland", author: "Oliver Bullough" }
-      ];
-
-      function slugify(value) {
-        return value
-          .normalize("NFD")
-          .replace(/[\u0300-\u036f]/g, "")
-          .toLowerCase()
-          .replace(/[^a-z0-9]+/g, "-")
-          .replace(/^-+|-+$/g, "");
-      }
-
-      function renderBooks() {
-        const grid = document.getElementById("booksGrid");
-        for (const book of books) {
-          const card = document.createElement("article");
-          card.className = "book-card";
-          const image = document.createElement("img");
-          image.alt = "Cover of " + book.title;
-          image.loading = "lazy";
-          image.decoding = "async";
-          image.className = "book-cover";
-          image.src = "/images/books/" + slugify(book.title) + ".jpg";
-
-          const title = document.createElement("h3");
-          title.className = "book-title";
-          title.textContent = book.title;
-
-          const author = document.createElement("p");
-          author.className = "book-author";
-          author.textContent = book.author ? "by " + book.author : "author unknown";
-
-          card.appendChild(image);
-          card.appendChild(title);
-          card.appendChild(author);
-          grid.appendChild(card);
-        }
-      }
-
-      renderBooks();
-    </script>
   </body>
 </html>
