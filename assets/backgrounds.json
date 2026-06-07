@@ -1,0 +1,114 @@
+{
+  "slides": [
+    {
+      "id": "blue-cigarette",
+      "image": "/images/backgrounds/blue-cigarette.jpg",
+      "color": "#474f67"
+    },
+    {
+      "id": "sparkling-water",
+      "image": "/images/backgrounds/sparkling-water.jpg",
+      "color": "#314d9c"
+    },
+    {
+      "id": "garden-fountain",
+      "image": "/images/backgrounds/garden-fountain.jpg",
+      "color": "#242f3c"
+    },
+    {
+      "id": "green-light-couple",
+      "image": "/images/backgrounds/green-light-couple.jpg",
+      "color": "#4f6e26"
+    },
+    {
+      "id": "robert-plant",
+      "image": "/images/backgrounds/robert-plant.jpg",
+      "color": "#5d6b58"
+    },
+    {
+      "id": "angels-harp",
+      "image": "/images/backgrounds/angels-harp.jpg",
+      "color": "#615b61"
+    },
+    {
+      "id": "shadow-flowers",
+      "image": "/images/backgrounds/shadow-flowers.jpg",
+      "color": "#474749"
+    },
+    {
+      "id": "want-to-be",
+      "image": "/images/backgrounds/want-to-be.jpg",
+      "color": "#933830"
+    },
+    {
+      "id": "forest-girl",
+      "image": "/images/backgrounds/forest-girl.jpg",
+      "color": "#1f261d"
+    },
+    {
+      "id": "moonlit-cliff",
+      "image": "/images/backgrounds/moonlit-cliff.jpg",
+      "color": "#403c32"
+    },
+    {
+      "id": "green-moon-lane",
+      "image": "/images/backgrounds/green-moon-lane.jpg",
+      "color": "#647753"
+    },
+    {
+      "id": "clock-face",
+      "image": "/images/backgrounds/clock-face.jpg",
+      "color": "#563635"
+    },
+    {
+      "id": "profile-portrait",
+      "image": "/images/backgrounds/profile-portrait.jpg",
+      "color": "#594844"
+    },
+    {
+      "id": "white-robes-lake",
+      "image": "/images/backgrounds/white-robes-lake.jpg",
+      "color": "#4c4f94"
+    },
+    {
+      "id": "dylan-chess",
+      "image": "/images/backgrounds/dylan-chess.jpg",
+      "color": "#565656"
+    },
+    {
+      "id": "helicopter-fall",
+      "image": "/images/backgrounds/helicopter-fall.jpg",
+      "color": "#c7c7c7"
+    },
+    {
+      "id": "dante-forest",
+      "image": "/images/backgrounds/dante-forest.jpg",
+      "color": "#52534a"
+    },
+    {
+      "id": "collage-grid",
+      "image": "/images/backgrounds/collage-grid.jpg",
+      "color": "#3e3e3e"
+    },
+    {
+      "id": "eye-grid",
+      "image": "/images/backgrounds/eye-grid.jpg",
+      "color": "#757477"
+    },
+    {
+      "id": "big-jay-mcneely",
+      "image": "/images/backgrounds/big-jay-mcneely.jpg",
+      "color": "#6b4c3c"
+    },
+    {
+      "id": "ship-sunset",
+      "image": "/images/backgrounds/ship-sunset.jpg",
+      "color": "#9f3b22"
+    },
+    {
+      "id": "witches-sabbath",
+      "image": "/images/backgrounds/witches-sabbath.jpg",
+      "color": "#61544f"
+    }
+  ]
+}

@@ -1,0 +1,266 @@
+[
+  {
+    "id": "blue-cigarette",
+    "source": "IMG_8251.jpg",
+    "output": "blue-cigarette.jpg",
+    "source_long_edge": 1170,
+    "output_size": [
+      1170,
+      1168
+    ],
+    "upgraded": false,
+    "status": "source"
+  },
+  {
+    "id": "sparkling-water",
+    "source": "IMG_8252.jpg",
+    "output": "sparkling-water.jpg",
+    "source_long_edge": 1455,
+    "output_size": [
+      1170,
+      1455
+    ],
+    "upgraded": false,
+    "status": "source"
+  },
+  {
+    "id": "garden-fountain",
+    "source": "IMG_8253.jpg",
+    "output": "garden-fountain.jpg",
+    "source_long_edge": 1170,
+    "output_size": [
+      1170,
+      1164
+    ],
+    "upgraded": false,
+    "status": "source"
+  },
+  {
+    "id": "green-light-couple",
+    "source": "IMG_8254.jpg",
+    "output": "green-light-couple.jpg",
+    "source_long_edge": 1299,
+    "output_size": [
+      1170,
+      1299
+    ],
+    "upgraded": false,
+    "status": "source"
+  },
+  {
+    "id": "robert-plant",
+    "source": "IMG_8255.jpg",
+    "output": "robert-plant.jpg",
+    "source_long_edge": 1435,
+    "output_size": [
+      1170,
+      1435
+    ],
+    "upgraded": false,
+    "status": "source"
+  },
+  {
+    "id": "angels-harp",
+    "source": "IMG_8256.jpg",
+    "output": "angels-harp.jpg",
+    "source_long_edge": 1420,
+    "output_size": [
+      1170,
+      1420
+    ],
+    "upgraded": false,
+    "status": "source"
+  },
+  {
+    "id": "shadow-flowers",
+    "source": "IMG_8257.jpg",
+    "output": "shadow-flowers.jpg",
+    "source_long_edge": 1399,
+    "output_size": [
+      1170,
+      1399
+    ],
+    "upgraded": false,
+    "status": "source"
+  },
+  {
+    "id": "want-to-be",
+    "source": "IMG_8258.jpg",
+    "output": "want-to-be.jpg",
+    "source_long_edge": 1371,
+    "output_size": [
+      1170,
+      1371
+    ],
+    "upgraded": false,
+    "status": "source"
+  },
+  {
+    "id": "forest-girl",
+    "source": "IMG_8259.jpg",
+    "output": "forest-girl.jpg",
+    "source_long_edge": 1170,
+    "output_size": [
+      1170,
+      907
+    ],
+    "upgraded": false,
+    "status": "source"
+  },
+  {
+    "id": "moonlit-cliff",
+    "source": "IMG_8260.jpg",
+    "output": "moonlit-cliff.jpg",
+    "source_long_edge": 1355,
+    "output_size": [
+      1170,
+      1355
+    ],
+    "upgraded": false,
+    "status": "source"
+  },
+  {
+    "id": "green-moon-lane",
+    "source": "IMG_8261.jpg",
+    "output": "green-moon-lane.jpg",
+    "source_long_edge": 1313,
+    "output_size": [
+      1170,
+      1313
+    ],
+    "upgraded": false,
+    "status": "source"
+  },
+  {
+    "id": "clock-face",
+    "source": "IMG_8262.jpg",
+    "output": "clock-face.jpg",
+    "source_long_edge": 1170,
+    "output_size": [
+      1170,
+      982
+    ],
+    "upgraded": false,
+    "status": "source"
+  },
+  {
+    "id": "profile-portrait",
+    "source": "IMG_8263.jpg",
+    "output": "profile-portrait.jpg",
+    "source_long_edge": 1170,
+    "output_size": [
+      1170,
+      1164
+    ],
+    "upgraded": false,
+    "status": "source"
+  },
+  {
+    "id": "white-robes-lake",
+    "source": "IMG_8264.jpg",
+    "output": "white-robes-lake.jpg",
+    "source_long_edge": 1170,
+    "output_size": [
+      1170,
+      896
+    ],
+    "upgraded": false,
+    "status": "source"
+  },
+  {
+    "id": "dylan-chess",
+    "source": "IMG_8265.jpg",
+    "output": "dylan-chess.jpg",
+    "source_long_edge": 1389,
+    "output_size": [
+      1170,
+      1389
+    ],
+    "upgraded": false,
+    "status": "source"
+  },
+  {
+    "id": "helicopter-fall",
+    "source": "IMG_8266.jpg",
+    "output": "helicopter-fall.jpg",
+    "source_long_edge": 1450,
+    "output_size": [
+      1170,
+      1450
+    ],
+    "upgraded": false,
+    "status": "source"
+  },
+  {
+    "id": "dante-forest",
+    "source": "IMG_8267.jpg",
+    "output": "dante-forest.jpg",
+    "source_long_edge": 1454,
+    "output_size": [
+      1170,
+      1454
+    ],
+    "upgraded": false,
+    "status": "source"
+  },
+  {
+    "id": "collage-grid",
+    "source": "IMG_8268.jpg",
+    "output": "collage-grid.jpg",
+    "source_long_edge": 1402,
+    "output_size": [
+      1170,
+      1402
+    ],
+    "upgraded": false,
+    "status": "source"
+  },
+  {
+    "id": "eye-grid",
+    "source": "IMG_8269.jpg",
+    "output": "eye-grid.jpg",
+    "source_long_edge": 1197,
+    "output_size": [
+      1170,
+      1197
+    ],
+    "upgraded": false,
+    "status": "source"
+  },
+  {
+    "id": "big-jay-mcneely",
+    "source": "IMG_8270.jpg",
+    "output": "big-jay-mcneely.jpg",
+    "source_long_edge": 1170,
+    "output_size": [
+      1170,
+      647
+    ],
+    "upgraded": false,
+    "status": "source"
+  },
+  {
+    "id": "ship-sunset",
+    "source": "IMG_8271.jpg",
+    "output": "ship-sunset.jpg",
+    "source_long_edge": 1332,
+    "output_size": [
+      1170,
+      1332
+    ],
+    "upgraded": false,
+    "status": "source"
+  },
+  {
+    "id": "witches-sabbath",
+    "source": "IMG_8272.jpg",
+    "output": "witches-sabbath.jpg",
+    "source_long_edge": 1170,
+    "output_size": [
+      1170,
+      779
+    ],
+    "upgraded": false,
+    "status": "source"
+  }
+]

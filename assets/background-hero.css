@@ -1,0 +1,217 @@
+/* Rotating photo backdrop (adapted from Pathfinder heritage hero) */
+
+html:has(body.page-with-backdrop),
+body.page-with-backdrop {
+  overflow-x: hidden;
+  min-height: 100%;
+  background: #0a0a0a !important;
+  background-image: none !important;
+}
+
+body.page-with-backdrop::before {
+  display: none;
+}
+
+.bg-hero--backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  pointer-events: none;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.bg-hero__visual {
+  position: absolute;
+  inset: 0;
+}
+
+.bg-hero__slide {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0;
+  transition: opacity 2.2s cubic-bezier(0.45, 0.05, 0.55, 0.95);
+  will-change: opacity;
+}
+
+.bg-hero__slide.is-visible {
+  opacity: 1;
+}
+
+.bg-hero__tint {
+  position: absolute;
+  inset: 0;
+  background: var(--bg-tint, #141210);
+  opacity: var(--bg-tint-opacity, 0.14);
+  pointer-events: none;
+}
+
+.bg-hero__scrim {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(
+      ellipse 90% 80% at 50% 45%,
+      rgba(0, 0, 0, 0.55) 0%,
+      rgba(0, 0, 0, 0.25) 45%,
+      transparent 75%
+    ),
+    linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.5) 0%,
+      rgba(0, 0, 0, 0.18) 30%,
+      rgba(0, 0, 0, 0.12) 70%,
+      rgba(0, 0, 0, 0.38) 100%
+    );
+  pointer-events: none;
+}
+
+body.page-with-backdrop .wrap {
+  position: relative;
+  z-index: 1;
+}
+
+body.page-with-backdrop .wrap::before {
+  content: "";
+  position: absolute;
+  inset: -3rem -4rem;
+  background: radial-gradient(
+    ellipse 100% 90% at 50% 40%,
+    rgba(0, 0, 0, 0.62) 0%,
+    rgba(0, 0, 0, 0.35) 40%,
+    transparent 72%
+  );
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Readable text via layered shadows — no frosted boxes */
+body.page-with-backdrop {
+  --shadow-text:
+    0 0 1px rgba(0, 0, 0, 1),
+    0 0 3px rgba(0, 0, 0, 1),
+    0 1px 4px rgba(0, 0, 0, 1),
+    0 2px 14px rgba(0, 0, 0, 0.95),
+    0 4px 28px rgba(0, 0, 0, 0.9),
+    0 8px 48px rgba(0, 0, 0, 0.75);
+  --shadow-text-strong:
+    0 0 2px rgba(0, 0, 0, 1),
+    0 0 6px rgba(0, 0, 0, 1),
+    0 2px 8px rgba(0, 0, 0, 1),
+    0 4px 20px rgba(0, 0, 0, 0.98),
+    0 8px 40px rgba(0, 0, 0, 0.95),
+    0 12px 56px rgba(0, 0, 0, 0.85);
+}
+
+body.page-with-backdrop header {
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border-bottom-color: rgba(255, 255, 255, 0.15);
+  box-shadow: none;
+}
+
+body.page-with-backdrop .intro-box,
+body.page-with-backdrop .mission-box,
+body.page-with-backdrop blockquote.opening-quote {
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border-radius: 0;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+body.page-with-backdrop .mission-box {
+  border-top-color: rgba(255, 255, 255, 0.18);
+}
+
+body.page-with-backdrop h1 {
+  text-shadow: var(--shadow-text-strong);
+}
+
+body.page-with-backdrop h2,
+body.page-with-backdrop h3,
+body.page-with-backdrop p,
+body.page-with-backdrop li,
+body.page-with-backdrop b,
+body.page-with-backdrop em,
+body.page-with-backdrop blockquote,
+body.page-with-backdrop cite,
+body.page-with-backdrop main,
+body.page-with-backdrop section {
+  text-shadow: var(--shadow-text);
+}
+
+body.page-with-backdrop .nav {
+  font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  font-size: 16px;
+  letter-spacing: 0.05em;
+}
+
+body.page-with-backdrop .nav a,
+body.page-with-backdrop .nav .sep,
+body.page-with-backdrop .nav a b {
+  text-shadow: var(--shadow-text-strong);
+}
+
+body.page-with-backdrop .nav a:hover {
+  text-shadow: var(--shadow-text-strong);
+}
+
+body.page-with-backdrop a {
+  text-shadow: var(--shadow-text);
+}
+
+body.page-with-backdrop .article-list li,
+body.page-with-backdrop .contact-list li,
+body.page-with-backdrop .media-card-link,
+body.page-with-backdrop .book-entry,
+body.page-with-backdrop .team-card,
+body.page-with-backdrop .news-card {
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border-color: rgba(255, 255, 255, 0.18);
+  box-shadow: none;
+}
+
+body.page-with-backdrop .media-card-title,
+body.page-with-backdrop .book-entry-title,
+body.page-with-backdrop .book-entry-author,
+body.page-with-backdrop .book-entry-quote,
+body.page-with-backdrop .article-list a,
+body.page-with-backdrop .contact-list b {
+  text-shadow: var(--shadow-text);
+}
+
+body.page-with-backdrop .media-card-link:hover,
+body.page-with-backdrop .article-list li:hover,
+body.page-with-backdrop .contact-list li:hover {
+  background: transparent;
+  box-shadow: none;
+  transform: none;
+}
+
+body.page-with-backdrop .article-list li::before,
+body.page-with-backdrop .contact-list li::before {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bg-hero__slide {
+    transition-duration: 0.5s;
+  }
+}
+
+@media print {
+  .bg-hero--backdrop {
+    display: none;
+  }
+}

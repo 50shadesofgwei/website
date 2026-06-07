@@ -6,8 +6,17 @@
   <link rel="icon" href="/images/Kasparov.jpeg" type="image/jpeg" />
   <title>Jonathan Feasby - Work & Projects</title>
   <link rel="stylesheet" href="/assets/theme.css" />
+    <link rel="stylesheet" href="/assets/background-hero.css" />
 </head>
-  <body>
+  <body class="page-with-backdrop">
+    <div id="bgHero" class="bg-hero bg-hero--backdrop" aria-hidden="true">
+      <div class="bg-hero__visual">
+        <div class="bg-hero__slide bg-hero__slide--a"></div>
+        <div class="bg-hero__slide bg-hero__slide--b"></div>
+        <div class="bg-hero__tint"></div>
+        <div class="bg-hero__scrim"></div>
+      </div>
+    </div>
     <div class="wrap">
       <header>
         <h1>Jonathan Feasby</h1>
@@ -28,5 +37,6 @@
           </section>
       </main>
     </div>
+      <script src="/assets/background-hero.js"></script>
   </body>
 </html>
