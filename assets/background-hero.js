@@ -186,10 +186,7 @@
       slideA.style.backgroundImage = layerBackground(first);
       slideA.classList.add("is-visible");
       if (isMobile()) startCarousel();
-      else {
-        hero.classList.add("bg-hero--static");
-        prefetchUpcoming();
-      }
+      else hero.classList.add("bg-hero--static");
     });
   }
 
@@ -232,4 +229,60 @@
     .catch(function () {
       hero.classList.add("bg-hero--failed");
     });
+
+  // Stamp text-shadows onto a frozen duplicate, then strip them from the live
+  // text. CSS text-shadow is re-rasterized on every hover/scroll invalidation;
+  // a static clone is painted once and never changes.
+  function freezeTextShadows() {
+    var wrap = document.querySelector("body.page-with-backdrop > .wrap");
+    if (!wrap || wrap.classList.contains("wrap--live")) return;
+
+    var clone = wrap.cloneNode(true);
+    clone.classList.add("wrap--shadow-freeze");
+    clone.setAttribute("aria-hidden", "true");
+
+    var doomed = clone.querySelectorAll("[id], script");
+    for (var i = 0; i < doomed.length; i++) {
+      if (doomed[i].id) doomed[i].removeAttribute("id");
+      if (doomed[i].tagName === "SCRIPT") doomed[i].parentNode.removeChild(doomed[i]);
+    }
+
+    var links = clone.querySelectorAll("a");
+    for (var j = 0; j < links.length; j++) {
+      links[j].setAttribute("tabindex", "-1");
+      links[j].removeAttribute("href");
+    }
+
+    wrap.parentNode.insertBefore(clone, wrap);
+
+    var liveImgs = wrap.querySelectorAll("img");
+    var cloneImgs = clone.querySelectorAll("img");
+    for (var k = 0; k < cloneImgs.length; k++) {
+      if (liveImgs[k]) {
+        cloneImgs[k].style.width = liveImgs[k].getBoundingClientRect().width + "px";
+        cloneImgs[k].style.height = liveImgs[k].getBoundingClientRect().height + "px";
+      }
+      cloneImgs[k].removeAttribute("src");
+      cloneImgs[k].removeAttribute("srcset");
+      cloneImgs[k].alt = "";
+    }
+
+    wrap.classList.add("wrap--live");
+  }
+
+  function scheduleFreeze() {
+    function run() {
+      if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(function () {
+          requestAnimationFrame(freezeTextShadows);
+        });
+      } else {
+        requestAnimationFrame(freezeTextShadows);
+      }
+    }
+    if (document.readyState === "complete") run();
+    else window.addEventListener("load", run);
+  }
+
+  scheduleFreeze();
 })();

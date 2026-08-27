@@ -22,6 +22,8 @@ body.page-with-backdrop::before {
   pointer-events: none;
   overflow: hidden;
   isolation: isolate;
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
 
 .bg-hero__visual {
@@ -54,6 +56,10 @@ body.page-with-backdrop::before {
   transition: none;
 }
 
+.bg-hero--static .bg-hero__slide--b {
+  display: none;
+}
+
 .bg-hero--static.is-crossfading .bg-hero__slide {
   will-change: auto;
 }
@@ -81,6 +87,43 @@ body.page-with-backdrop::before {
 body.page-with-backdrop .wrap {
   position: relative;
   z-index: 1;
+}
+
+body.page-with-backdrop .wrap--shadow-freeze {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  pointer-events: none;
+  user-select: none;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+body.page-with-backdrop .wrap--shadow-freeze::before {
+  display: none;
+}
+
+body.page-with-backdrop .wrap--shadow-freeze,
+body.page-with-backdrop .wrap--shadow-freeze * {
+  color: transparent !important;
+  background: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+
+body.page-with-backdrop .wrap--shadow-freeze img {
+  visibility: hidden;
+}
+
+body.page-with-backdrop .wrap--live {
+  z-index: 2;
+}
+
+body.page-with-backdrop .wrap--live,
+body.page-with-backdrop .wrap--live * {
+  text-shadow: none !important;
 }
 
 body.page-with-backdrop .wrap::before {
@@ -113,6 +156,7 @@ body.page-with-backdrop {
     0 4px 20px rgba(0, 0, 0, 0.98),
     0 8px 40px rgba(0, 0, 0, 0.95),
     0 12px 56px rgba(0, 0, 0, 0.85);
+  transition: none;
 }
 
 body.page-with-backdrop header {
@@ -149,9 +193,7 @@ body.page-with-backdrop li,
 body.page-with-backdrop b,
 body.page-with-backdrop em,
 body.page-with-backdrop blockquote,
-body.page-with-backdrop cite,
-body.page-with-backdrop main,
-body.page-with-backdrop section {
+body.page-with-backdrop cite {
   text-shadow: var(--shadow-text);
 }
 
@@ -173,6 +215,11 @@ body.page-with-backdrop .nav a:hover {
 
 body.page-with-backdrop a {
   text-shadow: var(--shadow-text);
+  transition: none;
+}
+
+body.page-with-backdrop .nav a {
+  transition: none;
 }
 
 body.page-with-backdrop .article-list li,
@@ -223,7 +270,8 @@ body.page-with-backdrop .contact-list li::before {
 }
 
 @media print {
-  .bg-hero--backdrop {
+  .bg-hero--backdrop,
+  .wrap--shadow-freeze {
     display: none;
   }
 }
