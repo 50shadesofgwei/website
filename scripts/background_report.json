@@ -250,17 +250,5 @@
     ],
     "upgraded": false,
     "status": "source"
-  },
-  {
-    "id": "witches-sabbath",
-    "source": "IMG_8272.jpg",
-    "output": "witches-sabbath.jpg",
-    "source_long_edge": 1170,
-    "output_size": [
-      1170,
-      779
-    ],
-    "upgraded": false,
-    "status": "source"
   }
 ]

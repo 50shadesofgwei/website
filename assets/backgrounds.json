@@ -104,11 +104,6 @@
       "id": "ship-sunset",
       "image": "/images/backgrounds/ship-sunset.jpg",
       "color": "#9f3b22"
-    },
-    {
-      "id": "witches-sabbath",
-      "image": "/images/backgrounds/witches-sabbath.jpg",
-      "color": "#61544f"
     }
   ]
 }

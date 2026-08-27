@@ -10,16 +10,6 @@ BACKDROP_BLOCK = """    <div id="bgHero" class="bg-hero bg-hero--backdrop" aria-
       <div class="bg-hero__visual">
         <div class="bg-hero__slide bg-hero__slide--a"></div>
         <div class="bg-hero__slide bg-hero__slide--b"></div>
-        <div class="bg-hero__tint"></div>
-        <div class="bg-hero__scrim"></div>
-      </div>
-    </div>
-"""
-BACKDROP_BLOCK_MESSY = """        <div id="bgHero" class="bg-hero bg-hero--backdrop" aria-hidden="true">
-      <div class="bg-hero__visual">
-        <div class="bg-hero__slide bg-hero__slide--a"></div>
-        <div class="bg-hero__slide bg-hero__slide--b"></div>
-        <div class="bg-hero__tint"></div>
         <div class="bg-hero__scrim"></div>
       </div>
     </div>
@@ -28,6 +18,10 @@ SCRIPT_TAG = '    <script src="/assets/background-hero.js"></script>\n'
 
 
 def patch_file(path: Path) -> bool:
+    # Chess studies deliberately sit on flat black, no backdrop.
+    if path.parent.name == "chess":
+        return False
+
     text = path.read_text()
     if "background-hero.css" in text:
         return False

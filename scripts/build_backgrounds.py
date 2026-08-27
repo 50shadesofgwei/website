@@ -23,7 +23,6 @@ JPEG_QUALITY = 82
 # Public-domain or CC sources only; otherwise keep the local screenshot.
 HD_SOURCES: dict[str, str] = {
     "IMG_8267.jpg": "https://upload.wikimedia.org/wikipedia/commons/d/dd/Gustave_Dore_Inferno1.jpg",
-    "IMG_8272.jpg": "https://upload.wikimedia.org/wikipedia/commons/d/d7/Witches_going_to_their_Sabbath_by_Luis_Ricardo_Falero.jpg",
     "IMG_8260.jpg": "https://upload.wikimedia.org/wikipedia/commons/2/2e/Moonlit_Night_%28Aivazovsky%29.jpg",
     "IMG_8261.jpg": "https://lakeimagesweb.artic.edu/iiif/2/273331/full/2000,/0/default.jpg",
 }
@@ -50,7 +49,6 @@ SLUGS = {
     "IMG_8269.jpg": "eye-grid",
     "IMG_8270.jpg": "big-jay-mcneely",
     "IMG_8271.jpg": "ship-sunset",
-    "IMG_8272.jpg": "witches-sabbath",
 }
 
 

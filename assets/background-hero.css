@@ -1,4 +1,4 @@
-/* Rotating photo backdrop (adapted from Pathfinder heritage hero) */
+/* Photo backdrop: static random image on desktop, rotating carousel on mobile */
 
 html:has(body.page-with-backdrop),
 body.page-with-backdrop {
@@ -27,6 +27,7 @@ body.page-with-backdrop::before {
 .bg-hero__visual {
   position: absolute;
   inset: 0;
+  contain: strict;
 }
 
 .bg-hero__slide {
@@ -37,6 +38,11 @@ body.page-with-backdrop::before {
   background-repeat: no-repeat;
   opacity: 0;
   transition: opacity 2.2s cubic-bezier(0.45, 0.05, 0.55, 0.95);
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+.bg-hero.is-crossfading .bg-hero__slide {
   will-change: opacity;
 }
 
@@ -44,12 +50,12 @@ body.page-with-backdrop::before {
   opacity: 1;
 }
 
-.bg-hero__tint {
-  position: absolute;
-  inset: 0;
-  background: var(--bg-tint, #141210);
-  opacity: var(--bg-tint-opacity, 0.14);
-  pointer-events: none;
+.bg-hero--static .bg-hero__slide {
+  transition: none;
+}
+
+.bg-hero--static.is-crossfading .bg-hero__slide {
+  will-change: auto;
 }
 
 .bg-hero__scrim {
@@ -180,6 +186,12 @@ body.page-with-backdrop .news-card {
   -webkit-backdrop-filter: none;
   border-color: rgba(255, 255, 255, 0.18);
   box-shadow: none;
+}
+
+/* Hairlines need more contrast to survive over a photo */
+body.page-with-backdrop .writings-column + .writings-column,
+body.page-with-backdrop .writings-column-title {
+  border-color: rgba(255, 255, 255, 0.22);
 }
 
 body.page-with-backdrop .media-card-title,

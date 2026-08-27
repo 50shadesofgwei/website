@@ -120,8 +120,6 @@ header{
   border-bottom: 1px solid var(--border);
   position: relative;
   background: linear-gradient(to bottom, rgba(17, 17, 17, 0.4) 0%, transparent 100%);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
   padding-top: var(--spacing-md);
   border-radius: var(--radius-md) var(--radius-md) 0 0;
   box-shadow: var(--shadow-sm);
@@ -576,6 +574,66 @@ footer{
   .media-card-title {
     font-size: 15px;
     padding: var(--spacing-sm) var(--spacing-md);
+  }
+}
+
+/* Writings index: Sciences and Humanities side by side */
+.writings-split {
+  display: grid;
+  row-gap: var(--spacing-2xl);
+}
+
+.writings-column {
+  min-width: 0;
+}
+
+.writings-column-title {
+  margin: 0;
+  padding-bottom: var(--spacing-sm);
+  border-bottom: 1px solid var(--border-light);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted-light);
+}
+
+.writings-column .media-card-grid {
+  margin: var(--spacing-lg) 0 0;
+}
+
+@media (min-width: 700px) {
+  .writings-split {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  /* Wide gutter and a full-height rule, so the stacks read as columns rather than rows of two */
+  .writings-column {
+    padding-right: var(--spacing-xl);
+  }
+
+  .writings-column + .writings-column {
+    padding-right: 0;
+    padding-left: var(--spacing-xl);
+    border-left: 1px solid var(--border-light);
+  }
+
+  /* Narrow columns need the image stacked above the title */
+  .writings-column .media-card-link {
+    flex-direction: column;
+  }
+
+  .writings-column .media-card-image {
+    flex: 0 0 auto;
+    aspect-ratio: 16 / 10;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .writings-column .media-card-title {
+    align-items: flex-start;
+    font-size: 16px;
+    padding: var(--spacing-md);
   }
 }
 
