@@ -747,6 +747,81 @@ footer{
   }
 }
 
+body.blog-page,
+body.chess-page {
+  background: #000;
+  background-image: none;
+}
+
+body.blog-page::before,
+body.chess-page::before {
+  display: none;
+}
+
+/* Blog: reverse-chronological stream (Daring Fireball layout) */
+.blog-feed {
+  padding: 0;
+}
+
+.blog-entry {
+  margin: 0 0 var(--spacing-2xl);
+  padding: 0 0 var(--spacing-2xl);
+  border-bottom: 1px solid var(--border);
+  content-visibility: auto;
+  contain-intrinsic-size: auto 720px;
+}
+
+.blog-entry:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.blog-entry-title {
+  font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  font-size: clamp(26px, 4vw, 34px);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.blog-entry-title a {
+  border-bottom: none;
+}
+
+.blog-entry-title a:hover {
+  color: var(--text);
+  border-bottom: none;
+  opacity: 0.8;
+}
+
+.blog-entry-date {
+  display: block;
+  margin: var(--spacing-sm) 0 var(--spacing-lg);
+  font-size: 14px;
+  font-style: italic;
+  letter-spacing: 0.02em;
+  color: var(--muted);
+}
+
+.blog-entry-body p:first-child {
+  margin-top: 0;
+}
+
+.blog-entry-body a {
+  border-bottom-color: rgba(255, 255, 255, 0.35);
+}
+
+.blog-entry-body ul {
+  margin: var(--spacing-md) 0;
+  padding-left: var(--spacing-lg);
+}
+
+.blog-entry-body li {
+  margin: var(--spacing-sm) 0;
+}
+
 /* Print styles */
 @media print {
   body {

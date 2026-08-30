@@ -1,15 +1,5 @@
 /* Chess studies — per-study page styling */
 
-/* Studies read on flat black so the board diagrams carry the page */
-body.chess-page {
-  background: #000;
-  background-image: none;
-}
-
-body.chess-page::before {
-  display: none;
-}
-
 .chess-study .back-link {
   margin: 0 0 var(--spacing-md);
   font-size: 14px;

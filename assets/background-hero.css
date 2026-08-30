@@ -97,8 +97,6 @@ body.page-with-backdrop .wrap--shadow-freeze {
   z-index: 1;
   pointer-events: none;
   user-select: none;
-  transform: translateZ(0);
-  backface-visibility: hidden;
 }
 
 body.page-with-backdrop .wrap--shadow-freeze::before {
@@ -128,8 +126,13 @@ body.page-with-backdrop .wrap--live * {
 
 body.page-with-backdrop .wrap::before {
   content: "";
-  position: absolute;
-  inset: -3rem -4rem;
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(100%, calc(var(--maxw) + 8rem));
+  height: 100vh;
+  height: 100dvh;
   background: radial-gradient(
     ellipse 100% 90% at 50% 40%,
     rgba(0, 0, 0, 0.62) 0%,
@@ -237,8 +240,13 @@ body.page-with-backdrop .news-card {
 
 /* Hairlines need more contrast to survive over a photo */
 body.page-with-backdrop .writings-column + .writings-column,
-body.page-with-backdrop .writings-column-title {
+body.page-with-backdrop .writings-column-title,
+body.page-with-backdrop .blog-entry {
   border-color: rgba(255, 255, 255, 0.22);
+}
+
+body.page-with-backdrop .blog-entry-date {
+  text-shadow: var(--shadow-text);
 }
 
 body.page-with-backdrop .media-card-title,

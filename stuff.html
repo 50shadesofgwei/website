@@ -6,16 +6,8 @@
   <link rel="icon" href="/images/Kasparov.jpeg" type="image/jpeg" />
   <title>Jonathan Feasby - Blog</title>
   <link rel="stylesheet" href="/assets/theme.css" />
-    <link rel="stylesheet" href="/assets/background-hero.css" />
 </head>
-  <body class="page-with-backdrop">
-    <div id="bgHero" class="bg-hero bg-hero--backdrop" aria-hidden="true">
-      <div class="bg-hero__visual">
-        <div class="bg-hero__slide bg-hero__slide--a"></div>
-        <div class="bg-hero__slide bg-hero__slide--b"></div>
-        <div class="bg-hero__scrim"></div>
-      </div>
-    </div>
+  <body class="blog-page">
     <div class="wrap">
       <header>
         <h1>Jonathan Feasby</h1>
@@ -29,13 +21,64 @@
         </nav>
       </header>
       <main>
-        <section>
-          <p>In 2021 I dropped out of university to start working in MEV and programmatic trading at what is now <a href="https://www.smg.org/" target="_blank" rel="noopener" style="text-decoration: underline">Special Mechanisms Group</a>. Later, I started programming trading bots on my own; work for which I was awarded around $70,000 throughout 2023 and early 2024 in grants from organisations such as <a href="https://gmx.io/#/" target="_blank" rel="noopener" style="text-decoration: underline">GMX</a> and <a href="https://www.synthetix.io/" target="_blank" rel="noopener" style="text-decoration: underline">Synthetix</a>.</p>
-          <p>A part of this work surrounding funding rate arbitrage is public and can be found <a href="https://github.com/50shadesofgwei/funding-rate-arbitrage" target="_blank" rel="noopener" style="text-decoration: underline">here</a>. This work later developed into a small private trading operation, for which $1m of investor capital was raised. In 2025 I was headhunted to join <a href="https://chaoslabs.xyz/" target="_blank" rel="noopener" style="text-decoration: underline">Chaos Labs</a> as a Researcher specialising in on-chain Perpetual Futures.</p>
-          <p>In March 2026 I founded Pathfinder Quantum Technologies Ltd. in order to design and manufacture photonically integrated trapped ion chips.</p>
-          </section>
+        <section class="blog-feed" aria-label="Blog">
+          <article class="blog-entry" id="finalising-component-parts">
+            <h2 class="blog-entry-title"><a href="#finalising-component-parts">Finalising Component Parts</a></h2>
+            <time class="blog-entry-date" datetime="2026-08-29">29 August 2026</time>
+            <div class="blog-entry-body">
+              <p>I have locked in the requirements for optical readout, optical addressing, optomechanics, and the surrounding magnetic field. I have cost estimates and supplier links for all of these parts, I have also discovered that CAD models of these parts are available for download online. This saves a great deal of time over my previous method of making the CAD from scratch.</p>
+              <p>There are a few sections left to fill out on the document which I will fill in tomorrow surrounding operating environment, software control and assessment criteria, then I can do a final price analysis and build the CAD system itself.</p>
+            </div>
+          </article>
+
+          <article class="blog-entry" id="specifying-is-difficult">
+            <h2 class="blog-entry-title"><a href="#specifying-is-difficult">Specifying is Difficult</a></h2>
+            <time class="blog-entry-date" datetime="2026-08-28">28 August 2026</time>
+            <div class="blog-entry-body">
+              <p>The vision of the computer that's floating around in my mind is starting to take a more well-defined shape. I've split the component parts out into function boxes; that is to say, light generation and manipulation is one box, the diamond plate and metallisation is another box, RF/MW generation is another and optomechanics is another still. I am beginning to develop a better geometric intuition for how these boxes are put together to create a full system.</p>
+              <p>That said, there are far, far more component pieces than I had previously assumed. Mounts (the things that hold the component parts in place) take up a large percentage of this number, as do all the fiddly connecting parts: wires, optical fibre and the like.</p>
+              <p>Have been somewhat derailed by my rejection from Entrepreneurs First, but am reassured by my current reading of <em>Churchill: Walking with Destiny</em> by Andrew Roberts. When Churchill was my age he was captured while fighting in the Second Boer War, and made an escape from a prisoner of war camp then travelled around 300 miles to friendly territory. In comparison my hardships seem somewhat meek.</p>
+            </div>
+          </article>
+
+          <article class="blog-entry" id="specify">
+            <h2 class="blog-entry-title"><a href="#specify">Specify!</a></h2>
+            <time class="blog-entry-date" datetime="2026-08-27">27 August 2026</time>
+            <div class="blog-entry-body">
+              <p>In interviews of Steve Jobs and Edwin Land, both mentioned that during the design process they could see the finished product right there in their heads, and the only difficulty was getting it down onto paper.</p>
+              <p>Today my vision for what the diamond computer looks like came to me &mdash; vague and ill-defined as it may still be.</p>
+              <p>Aside from this I have made some good progress on outreach. Diatope replied and confirmed they can handle <sup>14</sup>N implantation, annealing, NV characterisation, and identification of suitable single-NV registers. Pricing/lead time still pending.</p>
+              <p>John Martinis, winner of the 2025 Nobel Prize in physics, agreed to a call on quantum manufacturing on Monday. If my EF experience has taught me anything it's that I shouldn't jump the gun with celebrations, but even getting a response from a Nobel laureate is pretty cool.</p>
+            </div>
+          </article>
+
+          <article class="blog-entry" id="semiconductors-to-systems">
+            <h2 class="blog-entry-title"><a href="#semiconductors-to-systems">Semiconductors to Systems</a></h2>
+            <time class="blog-entry-date" datetime="2026-08-26">26 August 2026</time>
+            <div class="blog-entry-body">
+              <p>Attended a conference in London today for people working in and around semiconductor technology. I made some useful connections with whom I will follow up soon, including:</p>
+              <ul>
+                <li>Dr. Simon Thomas, CEO of Paragraf (a graphene electronics manufacturer) who invited me for a tour of Paragraf production facilities.</li>
+                <li>Dr. Neil Curson, a professor of nanotechnology and nanofabrication at UCL, currently working on silicon spin qubits. He mentioned having fabrication facilities that can place particles with a 2-atom-wide precision. Will be calling with him on Tuesday.</li>
+                <li>Dr. Joe Smith, lecturer in quantum technologies at the University of Sheffield. His research regarding photonic interconnects between solid-state defects is extremely relevant; we have arranged a lab visit on the 21st of September.</li>
+              </ul>
+              <p>A small note on general 'vibe', there was (with the exception of those people listed above) something of a sense of defeatism and low energy in a lot of the talks given at the event. A clear, non-meandering and <em>optimistic</em> communication style is key to differentiation in such environments.</p>
+            </div>
+          </article>
+
+          <article class="blog-entry" id="back-to-the-drawing-board">
+            <h2 class="blog-entry-title"><a href="#back-to-the-drawing-board">Back to the drawing board</a></h2>
+            <time class="blog-entry-date" datetime="2026-08-25">25 August 2026</time>
+            <div class="blog-entry-body">
+              <p>The immediate goal is a complete blueprint for a small NV-centre diamond quantum computer including the architecture, manufacturing plan, and a bill of materials.</p>
+              <p>Figuring that if one is to build a computer, one must first have a blueprint for a computer, I&rsquo;ve spent the day working through the physical machine piece by piece: diamond substrate and NV creation, microwave/RF delivery, control electronics, optics and readout. I&rsquo;ve contacted Element Six about the diamond plate itself, Ionoptika and Diatope about NV creation, and started evaluating an RFSoC4x2 running QICK-DAWG as a lower-cost control system (I looked at something from Quantum Machines but they cost around $150k, while an RFSoC4x2 is about $3k and QICK-DAWG is free).</p>
+              <p>I also received the news from Entrepreneurs First that I would not be making it into the FALL26 cohort. This is of course a setback (not to mention embarrassing given that I'd already told my friends that I'd already gotten in), but whatever. Upon hearing the news I got the first train down to London to protest my case in person, but upon my arrival they had all gone home already. I went back the next morning too but to no avail. I am concerned that I rubbed someone up the wrong way, and that this was what led to my being kicked off the program.</p>
+              <p>Their main objections were that I hadn&rsquo;t demonstrated that I could recruit strong people and that I appeared too committed to one idea. I disagree with parts of that assessment, but the recruiting criticism is testable. I need to get excellent technical people interested enough to actually work on this.</p>
+              <p>I&rsquo;ve also started publishing some of the work I've been doing. I posted the earlier ion-trap design on Hacker News and have started self-advertising in the comments section of <a href="https://www.youtube.com/@632nmpodcast" target="_blank" rel="noopener">632nm</a> to try get my work in front of a technical audience.</p>
+            </div>
+          </article>
+        </section>
       </main>
     </div>
-      <script src="/assets/background-hero.js"></script>
   </body>
 </html>
