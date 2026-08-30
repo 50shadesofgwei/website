@@ -822,6 +822,17 @@ body.chess-page::before {
   margin: var(--spacing-sm) 0;
 }
 
+.blog-figure {
+  margin: var(--spacing-lg) 0 0;
+}
+
+.blog-figure img {
+  display: block;
+  max-width: 70%;
+  height: auto;
+  border: 1px solid var(--border);
+}
+
 /* Print styles */
 @media print {
   body {
